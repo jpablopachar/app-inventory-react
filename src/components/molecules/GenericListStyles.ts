@@ -16,8 +16,8 @@ interface GenericListStylesProps {
     body: string
     text: string
   }
-  $bottom?: string
-  scroll?: string
+  $bottom: string
+  scroll: string
 }
 
 /**
