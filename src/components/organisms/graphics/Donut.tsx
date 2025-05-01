@@ -1,28 +1,20 @@
-import {
-  BarElement,
-  CategoryScale,
-  Chart as ChartJS,
-  Legend,
-  LinearScale,
-  Title,
-  Tooltip,
-} from 'chart.js'
+import { ArcElement, Chart as ChartJS, Legend, Tooltip } from 'chart.js'
 import { JSX } from 'react'
-import { Bar } from 'react-chartjs-2'
+import { Doughnut } from 'react-chartjs-2'
 
-import { BarsContainer, ContentCards } from './BarsStyles'
+import { DonutContainer, DonutContentCards } from './DonutStyles'
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
+ChartJS.register(ArcElement, Tooltip, Legend)
 
 /**
- * Propiedades para el componente Bars.
+ * Propiedades para el componente Donut.
  *
- * @property {object} graphicData - Datos formateados para el gráfico de barras ChartJS
+ * @property {object} graphicData - Datos formateados para el gráfico de dona ChartJS
  * @property {Array<{icon: JSX.Element, description: string, total: number | string}>} data
  * - Arreglo de datos a mostrar en la lista
- * @property {string} titulo - Título que describe los datos mostrados
+ * @property {string} title - Título que describe los datos mostrados
  */
-interface BarsProps {
+interface DonutProps {
   graphicData: {
     labels: string[]
     datasets: {
@@ -42,25 +34,26 @@ interface BarsProps {
 }
 
 /**
- * Componente que muestra un gráfico de barras junto con una lista detallada de los valores.
+ * Componente que muestra un gráfico de dona junto con una lista detallada de los valores.
  *
  * @component
  * @param {Object} props - Propiedades del componente
- * @param {Object} props.graphicData - Datos formateados para el gráfico de barras
+ * @param {Object} props.graphicData - Datos formateados para el gráfico de dona
  * @param {Array} props.data - Datos para mostrar en la lista de elementos
  * @param {string} props.title - Título descriptivo para la sección de datos
  *
- * @returns {JSX.Element} Un componente con visualización gráfica y listado detallado de datos
+ * @returns {JSX.Element} Un componente con visualización gráfica
+ * circular y listado detallado de datos
  */
-const Bars: React.FC<BarsProps> = ({ graphicData, data, title }) => {
+const Donut: React.FC<DonutProps> = ({ graphicData, data, title }) => {
   const style = {
     width: '400px',
   }
 
   return (
-    <BarsContainer>
+    <DonutContainer>
       <section>
-        <Bar data={graphicData} style={style} />
+        <Doughnut data={graphicData} style={style} />
       </section>
       <section>
         <h2>
@@ -69,17 +62,17 @@ const Bars: React.FC<BarsProps> = ({ graphicData, data, title }) => {
           por categoría
         </h2>
         {data.map((item, index) => (
-          <ContentCards key={index}>
+          <DonutContentCards key={index}>
             <div className="contentDescripcion">
               <span>{item.icon}</span>
               <span className="description">{item.description}</span>
             </div>
             <span>{item.total}</span>
-          </ContentCards>
+          </DonutContentCards>
         ))}
       </section>
-    </BarsContainer>
+    </DonutContainer>
   )
 }
 
-export default Bars
+export default Donut
