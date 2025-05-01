@@ -48,7 +48,6 @@ export const BtnCircularContainer = styled.div<BtnCircularStylesProps>`
   position: absolute;
   transform: translateX(${(props) => props.$translateX})
     translateY(${(props) => props.$translateY});
-
   span {
     font-size: ${(props) => props.$fontSize};
     text-align: center;

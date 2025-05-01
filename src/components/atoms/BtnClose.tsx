@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 
-import { ContainerStyles } from './BtnCloseStyles'
+import styled from 'styled-components'
 
 import { iconsAndVars } from '@/styles'
 
@@ -14,6 +14,24 @@ interface BtnCloseProps {
 }
 
 /**
+ * Componente estilizado que representa un contenedor tipo <span> para un botón de cierre.
+ *
+ * @remarks
+ * Este componente utiliza estilos personalizados para mostrar un cursor de puntero,
+ * un tamaño de fuente de 25px y una transición suave en todas las propiedades.
+ * Al pasar el mouse por encima, cambia el color utilizando la variable `selectorColor`
+ * definida en `iconsAndVars`.
+ */
+const Container = styled.span`
+  cursor: pointer;
+  font-size: 25px;
+  transition: all 0.2s;
+  &:hover {
+    color: ${() => iconsAndVars.selectorColor};
+  }
+`
+
+/**
  * Botón de cierre reutilizable.
  *
  * @component
@@ -22,11 +40,7 @@ interface BtnCloseProps {
  * @returns {ReactElement} Elemento JSX que representa un botón de cierre con un ícono.
  */
 const BtnClose: React.FC<BtnCloseProps> = ({ task }): ReactElement => {
-  return (
-    <ContainerStyles onClick={task}>
-      {<iconsAndVars.closeIcon />}
-    </ContainerStyles>
-  )
+  return <Container onClick={task}>{<iconsAndVars.closeIcon />}</Container>
 }
 
 export default BtnClose

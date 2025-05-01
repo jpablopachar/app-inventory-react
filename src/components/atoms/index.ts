@@ -1,7 +1,5 @@
 export * from './BtnClose'
 
-export * from './BtnCloseStyles'
-
 export * from './ColorContentStyles'
 
 export * from './ContentFiltersStyles'
@@ -13,3 +11,4 @@ export * from './IconStyles'
 export * from './ShapesStyles'
 
 export * from './TitleStyles'
+

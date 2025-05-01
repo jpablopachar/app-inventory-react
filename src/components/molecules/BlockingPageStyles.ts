@@ -32,7 +32,6 @@ export const BlockingPageContainer = styled.div<BlockingPageStylesProps>`
   z-index: 10;
   background: rgba(26, 9, 9, 0.9);
   border: 1px solid rgba(248, 42, 45, 0.5);
-
   padding: 15px;
   display: flex;
   gap: 15px;
