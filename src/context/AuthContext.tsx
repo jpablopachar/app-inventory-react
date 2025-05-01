@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react'
 
-import { supabase as supaBaseConfig } from '@/supabase'
+import { supabase } from '@/supabase'
 
 /**
  * Propiedades para el contexto de autenticación.
@@ -39,7 +39,7 @@ export const AuthContextProvider: React.FC<AuthContextProps> = ({
   const [user, setUser] = useState<User | null>(null)
 
   useEffect(() => {
-    const { data: authListener } = supaBaseConfig.auth.onAuthStateChange(
+    const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
         if (session?.user === null) {
           setUser(null)
