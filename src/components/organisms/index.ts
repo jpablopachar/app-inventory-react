@@ -1,6 +1,8 @@
-export * from './Selector'
+export { default as Selector } from './Selector'
 
 export * from './SelectorStyles'
+
+export { default as BannerHome } from './BannerHome'
 
 export * from './forms'
 
