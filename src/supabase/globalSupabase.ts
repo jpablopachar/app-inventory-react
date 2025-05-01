@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import { supabase } from './supabase.config'
 
 /**
@@ -20,6 +22,8 @@ export const getIdAuthSupabase = async (): Promise<string | undefined> => {
 
     const { id } = user
 
+    console.log(`ID del usuario autenticado: ${id}`)
+
     return id
   }
 }
@@ -35,6 +39,8 @@ export const getModules = async (): Promise<any[] | undefined> => {
   const { data } = await supabase.from('modules').select()
 
   if (data) {
+    console.log(`Lista de módulos: ${data}`)
+
     return data
   }
 }

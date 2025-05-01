@@ -1,7 +1,7 @@
 import { SignInWithPasswordCredentials } from '@supabase/supabase-js'
 import { create } from 'zustand'
 
-import { logOut, signIn } from '@/services'
+import { logOut, signIn } from '@/supabase'
 
 /**
  * Hook de estado global para la autenticación de usuarios.
