@@ -1,4 +1,4 @@
-export * from './BtnClose'
+export { default as BtnClose } from './BtnClose'
 
 export * from './ColorContentStyles'
 

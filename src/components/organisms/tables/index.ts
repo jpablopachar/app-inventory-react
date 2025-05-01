@@ -1,3 +1,3 @@
-export * from './ActionsTable'
+export { default as ActionsTable } from './ActionsTable'
 
 export * from './ActionsTableStyles'

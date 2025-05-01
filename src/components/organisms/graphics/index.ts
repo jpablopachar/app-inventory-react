@@ -1,11 +1,11 @@
-export * from './Bars'
+export { default as Bars } from './Bars'
 
 export * from './BarsStyles'
 
-export * from './Donut'
+export { default as Donut } from './Donut'
 
 export * from './DonutStyles'
 
-export * from './Lineal'
+export { default as Lineal } from './Lineal'
 
 export * from './LinealStyles'

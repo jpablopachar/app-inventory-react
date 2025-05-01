@@ -1,46 +1,46 @@
-export * from './AnimationLottie'
+export { default as AnimationLottie } from './AnimationLottie'
 
-export * from './BlockingPage'
+export { default as BlockingPage } from './BlockingPage'
 
 export * from './BlockingPageStyles'
 
-export * from './BtnCircular'
+export { default as BtnCircular } from './BtnCircular'
 
 export * from './BtnCircularStyles'
 
-export * from './BtnDropdown'
+export { default as BtnDropdown } from './BtnDropdown'
 
 export * from './BtnDropdownStyles'
 
-export * from './BtnFilter'
+export { default as BtnFilter } from './BtnFilter'
 
 export * from './BtnFilterStyles'
 
-export * from './BtnSave'
+export { default as BtnSave } from './BtnSave'
 
 export * from './BtnSaveStyles'
 
-export * from './CardCompanyData'
+export { default as CardCompanyData } from './CardCompanyData'
 
 export * from './CardCompanyDataStyles'
 
-export * from './GenericList'
+export { default as GenericList } from './GenericList'
 
 export * from './GenericListStyles'
 
-export * from './InputListSearchEngine'
+export { default as InputListSearchEngine } from './InputListSearchEngine'
 
 export * from './InputListSearchEngineStyles'
 
-export * from './ItemDropdown'
+export { default as ItemDropdown } from './ItemDropdown'
 
 export * from './ItemDropdownStyles'
 
-export * from './MenuDropdownList'
+export { default as MenuDropdownList } from './MenuDropdownList'
 
 export * from './MenuDropdownListStyles'
 
-export * from './Message'
+export { default as Message } from './Message'
 
 export * from './MessageStyles'
 
