@@ -2,6 +2,7 @@ import { createContext, ReactElement, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 
 import { AuthContextProvider } from './context'
+import { RoutesApp } from './routes'
 import { Dark, Light } from './styles'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,7 +21,7 @@ function App(): ReactElement {
       <ThemeContext.Provider value={{ theme, setThemeUse }}>
         <ThemeProvider theme={themeStyle}>
           <AuthContextProvider>
-            <>Hola mundo!</>
+            <RoutesApp />
           </AuthContextProvider>
         </ThemeProvider>
       </ThemeContext.Provider>
