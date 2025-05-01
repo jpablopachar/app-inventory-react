@@ -72,13 +72,13 @@ export const getUsers = async (): Promise<any> => {
  * Obtiene todos los usuarios asociados a una compañía específica utilizando una función remota
  * de Supabase.
  *
- * @param idCompany - El identificador único de la compañía cuyos usuarios se desean obtener.
+ * @param companyId - El identificador único de la compañía cuyos usuarios se desean obtener.
  * @returns Una promesa que resuelve con los datos de los usuarios de la compañía, o `undefined`
  * si no hay datos.
  */
-export const getAllUsers = async (idCompany: string): Promise<any> => {
+export const getAllUsers = async (companyId: string): Promise<any> => {
   const { data } = await supabase.rpc('showEmployees', {
-    _idCompany: idCompany,
+    _idCompany: companyId,
   })
 
   if (data) {
