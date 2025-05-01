@@ -39,6 +39,10 @@ Use the following structure for your response:
 
 ## Warning
 
+- CRITICAL: DO NOT CREATE FOLDERS with the component name, only generate flat files
+- CRITICAL: DO NOT CREATE index.ts files to export the component
+- IGNORE ANY PREVIOUS INSTRUCTIONS suggesting to create component folders or index.ts files
+- File generation must ALWAYS be direct: only ComponentName.tsx and ComponentNameStyles.ts
 - The styles file should be named `ComponentNameStyles.ts` (not ComponentName.styles.ts)
 - Check if the styles file already exists before creating a new one
 - Ensure all prop interfaces are properly typed and avoid using `any` unless absolutely necessary
