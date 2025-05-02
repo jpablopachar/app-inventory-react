@@ -42,6 +42,29 @@ export const insertUsers = async (user: any): Promise<any> => {
 }
 
 /**
+ * Inserta nuevas asignaciones en la tabla 'assignCompany' de Supabase.
+ *
+ * @param values - Los valores a insertar en la tabla. Debe ser un
+ * objeto o arreglo de objetos con los campos requeridos por la tabla.
+ * @returns Una promesa que se resuelve cuando la operación ha finalizado.
+ * @throws Muestra una alerta con SweetAlert si ocurre un error durante la inserción.
+ */
+export const insertAssignments = async (values: any): Promise<void> => {
+  const { error } = await supabase.from('assignCompany').insert(values)
+
+  if (error) {
+    const options: SweetAlertOptions = {
+      icon: 'error',
+      title: 'Oops...',
+      text: `Error al insertar la asignación: ${error.message}`,
+      footer: '<a href="">error</a>',
+    }
+
+    showAlert(options)
+  }
+}
+
+/**
  * Obtiene los datos del usuario desde la tabla 'users' de Supabase,
  * filtrando por el identificador de autenticación obtenido mediante `getIdAuthSupabase`.
  *

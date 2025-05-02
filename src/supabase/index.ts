@@ -6,3 +6,5 @@ export * from './crudAuth'
 
 export * from './crudUsers'
 
+export * from './crudPermissions'
+

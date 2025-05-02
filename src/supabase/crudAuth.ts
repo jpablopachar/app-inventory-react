@@ -1,4 +1,8 @@
-import { SignInWithPasswordCredentials, User } from '@supabase/supabase-js'
+import {
+  SignInWithPasswordCredentials,
+  SignUpWithPasswordCredentials,
+  User,
+} from '@supabase/supabase-js'
 
 import { supabase } from '@/supabase'
 
@@ -35,4 +39,23 @@ export const logOut = async (): Promise<void> => {
   if (error) {
     throw new Error('Ha ocurrido un error al cerrar sesión: ' + error)
   }
+}
+
+/**
+ * Registra un nuevo usuario utilizando las credenciales proporcionadas.
+ *
+ * @param credentials - Credenciales necesarias para el registro del usuario.
+ * @returns Una promesa que resuelve con el usuario registrado si
+ * el proceso es exitoso, o `null` si ocurre un error.
+ */
+export const signUp = async (
+  credentials: SignUpWithPasswordCredentials,
+): Promise<User | null> => {
+  const { data, error } = await supabase.auth.signUp(credentials)
+
+  if (error) {
+    return null
+  }
+
+  return data.user
 }
