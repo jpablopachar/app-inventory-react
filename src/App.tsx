@@ -1,3 +1,4 @@
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { createContext, ReactElement, useState } from 'react'
 import { ThemeProvider } from 'styled-components'
 
@@ -22,6 +23,7 @@ function App(): ReactElement {
         <ThemeProvider theme={themeStyle}>
           <AuthContextProvider>
             <RoutesApp />
+            <ReactQueryDevtools initialIsOpen />
           </AuthContextProvider>
         </ThemeProvider>
       </ThemeContext.Provider>
