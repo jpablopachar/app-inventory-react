@@ -1,47 +1,41 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable no-console */
 
-import { SignUpWithPasswordCredentials } from '@supabase/supabase-js'
 import { create } from 'zustand'
 
-import { Permissions, UserData } from '@/interfaces'
-import {
-  getAllUsers,
-  getUsers,
-  insertAssignments,
-  insertUsers,
-  logOut,
-  signUp,
-} from '@/supabase'
-
-export const useUserStore = create((set, get) => ({
+/**
+ * Hook personalizado para gestionar el estado del usuario en la aplicación.
+ * 
+ * Proporciona métodos y propiedades para manejar datos relacionados con usuarios,
+ * incluyendo la selección de usuarios, almacenamiento de datos de módulos, y visualización
+ * de listas de usuarios.
+ * 
+ * @returns Un objeto con el estado y funciones para manipular datos de usuario.
+ * 
+ * Propiedades:
+ * - `ModulesCheckData`: Arreglo que almacena los datos de verificación de módulos.
+ * - `setModulesCheckData`: Función para actualizar los datos de verificación de módulos.
+ * - `userId`: Identificador del usuario seleccionado.
+ * - `setUserId`: Función para restablecer el identificador del usuario.
+ * - `usersData`: Arreglo con los datos del usuario actual.
+ * - `usersAllData`: Arreglo con los datos de todos los usuarios.
+ * - `showUsers`: Función para mostrar y seleccionar un usuario,
+ * actualizando el estado correspondiente.
+ * - `showUsersAll`: Función para mostrar todos los usuarios,
+ * actualizando el estado correspondiente.
+ */
+export const useUserStore = create((set) => ({
   ModulesCheckData: [],
   setModulesCheckData: (data: any) => set({ ModulesCheckData: data }),
   userId: 0,
   setUserId: () => set({ userId: 0 }),
   usersData: [],
   usersAllData: [],
-  showUsers: async () => {
-    const res = await getUsers()
-
-    set({ usersData: res })
-
-    if (!res) {
-      return []
-    }
-
-    set({ userId: res.id })
-
-    return res
+  showUsers: (user: any) => {
+    set({ usersData: user })
+    set({ userId: user.id })
   },
-  showUsersAll: async (companyId: string) => {
-    const res = await getAllUsers(companyId)
-
-    set({ usersAllData: res })
-
-    return res
-  },
-  insertUser: async (
+  showUsersAll: (users: any) => set({ usersAllData: users }),
+  /* insertUser: async (
     credentials: SignUpWithPasswordCredentials,
     userData: UserData,
     checkPermissionsData: Permissions[],
@@ -85,5 +79,5 @@ export const useUserStore = create((set, get) => ({
     await logOut()
 
     return user
-  },
+  }, */
 }))
