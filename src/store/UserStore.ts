@@ -4,20 +4,20 @@ import { create } from 'zustand'
 
 /**
  * Hook personalizado para gestionar el estado del usuario en la aplicación.
- * 
+ *
  * Proporciona métodos y propiedades para manejar datos relacionados con usuarios,
  * incluyendo la selección de usuarios, almacenamiento de datos de módulos, y visualización
  * de listas de usuarios.
- * 
+ *
  * @returns Un objeto con el estado y funciones para manipular datos de usuario.
- * 
+ *
  * Propiedades:
  * - `ModulesCheckData`: Arreglo que almacena los datos de verificación de módulos.
- * - `setModulesCheckData`: Función para actualizar los datos de verificación de módulos.
  * - `userId`: Identificador del usuario seleccionado.
- * - `setUserId`: Función para restablecer el identificador del usuario.
  * - `usersData`: Arreglo con los datos del usuario actual.
  * - `usersAllData`: Arreglo con los datos de todos los usuarios.
+ * - `setModulesCheckData`: Función para actualizar los datos de verificación de módulos.
+ * - `setUserId`: Función para restablecer el identificador del usuario.
  * - `showUsers`: Función para mostrar y seleccionar un usuario,
  * actualizando el estado correspondiente.
  * - `showUsersAll`: Función para mostrar todos los usuarios,
@@ -25,11 +25,11 @@ import { create } from 'zustand'
  */
 export const useUserStore = create((set) => ({
   ModulesCheckData: [],
-  setModulesCheckData: (data: any) => set({ ModulesCheckData: data }),
   userId: 0,
-  setUserId: () => set({ userId: 0 }),
   usersData: [],
   usersAllData: [],
+  setModulesCheckData: (data: any) => set({ ModulesCheckData: data }),
+  setUserId: () => set({ userId: 0 }),
   showUsers: (user: any) => {
     set({ usersData: user })
     set({ userId: user.id })
