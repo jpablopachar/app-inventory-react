@@ -1,7 +1,7 @@
 import {
   SignInWithPasswordCredentials,
   SignUpWithPasswordCredentials,
-  User,
+  User
 } from '@supabase/supabase-js'
 
 import { supabase } from '@/supabase'
@@ -9,10 +9,12 @@ import { supabase } from '@/supabase'
 /**
  * Inicia sesión de un usuario utilizando las credenciales proporcionadas.
  *
+ * Esta función utiliza Supabase para autenticar al usuario con su correo electrónico y contraseña.
+ *
  * @param credentials - Credenciales del usuario para iniciar
  * sesión (correo electrónico y contraseña).
- * @returns Una promesa que resuelve con el usuario autenticado si
- * las credenciales son correctas, o `null` si ocurre un error.
+ * @returns El usuario autenticado (`User`) si el inicio de sesión
+ * es exitoso, o `null` si ocurre un error.
  */
 export const signIn = async (
   credentials: SignInWithPasswordCredentials,
@@ -20,6 +22,15 @@ export const signIn = async (
   const { data, error } = await supabase.auth.signInWithPassword(credentials)
 
   if (error) {
+    /* const options: SweetAlertOptions = {
+      icon: 'error',
+      title: 'Oops...',
+      text: `Error al iniciar sesión: ${error.message}`,
+      footer: '<a href="">error</a>',
+    }
+
+    showAlert(options) */
+
     return null
   }
 
@@ -54,6 +65,15 @@ export const signUp = async (
   const { data, error } = await supabase.auth.signUp(credentials)
 
   if (error) {
+    /* const options: SweetAlertOptions = {
+      icon: 'error',
+      title: 'Oops...',
+      text: `Error al registrar el usuario: ${error.message}`,
+      footer: '<a href="">error</a>',
+    }
+
+    showAlert(options) */
+
     return null
   }
 
