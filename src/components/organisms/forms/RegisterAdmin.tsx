@@ -1,3 +1,6 @@
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+
 /**
  * Propiedades para el componente RegisterAdmin.
  *
@@ -11,6 +14,14 @@ interface RegisterAdminProps {
 }
 
 const RegisterAdmin: React.FC<RegisterAdminProps> = ({ state, setState }) => {
+  const navigate = useNavigate()
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm()
+
   return (
     <div>RegisterAdmin</div>
   )
