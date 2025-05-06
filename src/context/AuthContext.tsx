@@ -41,13 +41,13 @@ export const AuthContextProvider: React.FC<AuthContextProps> = ({
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        if (session?.user === null) {
+        console.log('event', event)
+        console.log('session', session)
+
+        if (session === null) {
           setUser(null)
         } else {
           setUser(session!.user)
-
-          console.log('event', event)
-          console.log('session', session)
         }
       },
     )

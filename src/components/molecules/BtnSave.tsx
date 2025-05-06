@@ -16,11 +16,11 @@ import { IconStyles } from '../atoms'
  * @property url URL asociada al botón, utilizada para redireccionar o identificar la acción.
  */
 interface BtnSaveProps {
-  task: () => void
+  task?: () => void
   title: string
   bgColor: string
-  icon: JSX.Element
-  url: string
+  icon?: JSX.Element
+  url?: string
 }
 
 /**

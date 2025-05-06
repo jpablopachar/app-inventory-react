@@ -45,7 +45,7 @@ import {
   TbReportAnalytics,
 } from 'react-icons/tb'
 
-import logo from '../assets/inventarioslogo.png'
+import logo from '../assets/inventariosLogo.png'
 
 /**
  * @constant
