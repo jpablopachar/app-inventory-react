@@ -20,6 +20,27 @@ import { ThemeContext } from '@/context'
 import { loginUser } from '@/services'
 import { iconsAndVars } from '@/styles'
 
+/**
+ * Componente de plantilla para la pantalla de inicio de sesión.
+ *
+ * Este componente renderiza la interfaz de usuario para que los usuarios puedan
+ * iniciar sesión en la aplicación.
+ * Incluye un formulario para ingresar el correo electrónico y la contraseña, así
+ * como opciones para crear una nueva cuenta.
+ * Utiliza React Hook Form para la gestión del formulario y react-query para
+ * manejar la mutación de inicio de sesión.
+ * Además, ajusta el tema de la aplicación al modo claro al montarse.
+ *
+ * Características principales:
+ * - Permite a los usuarios iniciar sesión proporcionando su correo electrónico y contraseña.
+ * - Muestra mensajes de error si los campos requeridos no están completos o si
+ * las credenciales son incorrectas.
+ * - Ofrece la opción de crear una nueva cuenta de administrador.
+ * - Cambia el tema de la aplicación a "light" al cargar el componente.
+ * - Navega a la página principal tras un inicio de sesión exitoso.
+ *
+ * @component
+ */
 const LoginTemplate: React.FC = () => {
   const navigate = useNavigate()
 
@@ -46,6 +67,16 @@ const LoginTemplate: React.FC = () => {
   const [password, setPassword] = useState('')
   const [initialState, setInitialState] = useState(false)
 
+  /**
+   * Maneja el evento de envío del formulario de inicio de sesión.
+   *
+   * @param data - Los valores del formulario, que deben incluir los campos 'email' y 'password'.
+   * @returns Una promesa que se resuelve cuando la operación de envío ha finalizado.
+   *
+   * Si el estado `state` es verdadero, construye un objeto de credenciales con el
+   * correo electrónico y la contraseña
+   * proporcionados, y ejecuta la mutación para procesar el inicio de sesión.
+   */
   const onHandleSubmit = async (data: FieldValues): Promise<void> => {
     if (state) {
       const credentials = {
@@ -59,7 +90,7 @@ const LoginTemplate: React.FC = () => {
 
   useEffect(() => {
     setThemeUse('light')
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
