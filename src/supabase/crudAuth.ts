@@ -4,7 +4,10 @@ import {
   User
 } from '@supabase/supabase-js'
 
+import { SweetAlertOptions } from 'sweetalert2'
+
 import { supabase } from '@/supabase'
+import { showAlert } from '@/utils'
 
 /**
  * Inicia sesión de un usuario utilizando las credenciales proporcionadas.
@@ -22,14 +25,14 @@ export const signIn = async (
   const { data, error } = await supabase.auth.signInWithPassword(credentials)
 
   if (error) {
-    /* const options: SweetAlertOptions = {
+    const options: SweetAlertOptions = {
       icon: 'error',
       title: 'Oops...',
       text: `Error al iniciar sesión: ${error.message}`,
       footer: '<a href="">error</a>',
     }
 
-    showAlert(options) */
+    showAlert(options)
 
     return null
   }
@@ -65,14 +68,14 @@ export const signUp = async (
   const { data, error } = await supabase.auth.signUp(credentials)
 
   if (error) {
-    /* const options: SweetAlertOptions = {
+    const options: SweetAlertOptions = {
       icon: 'error',
       title: 'Oops...',
       text: `Error al registrar el usuario: ${error.message}`,
       footer: '<a href="">error</a>',
     }
 
-    showAlert(options) */
+    showAlert(options)
 
     return null
   }

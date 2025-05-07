@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import { useForm } from 'react-hook-form'
+import { FieldValues, useForm } from 'react-hook-form'
 import { MdAlternateEmail } from 'react-icons/md'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { useNavigate } from 'react-router-dom'
@@ -8,6 +8,7 @@ import InputText from './InputText'
 import { ContentClose, RegisterAdminContainer } from './RegisterAdminStyle'
 
 import { BtnSave } from '@/components/molecules'
+import { addUser } from '@/services'
 import { iconsAndVars } from '@/styles'
 
 /**
@@ -26,9 +27,7 @@ const RegisterAdmin: React.FC<RegisterAdminProps> = ({ state, setState }) => {
   const navigate = useNavigate()
 
   const mutation = useMutation({
-    mutationFn: async (data) => {
-      console.log('data', data)
-    },
+    mutationFn: addUser,
   })
 
   const {
@@ -37,10 +36,18 @@ const RegisterAdmin: React.FC<RegisterAdminProps> = ({ state, setState }) => {
     handleSubmit,
   } = useForm()
 
+  const onHandleSubmit = async (data: FieldValues): Promise<void> => {
+    console.log('data', data)
+  }
+
+  const onHandleClick = (): void => {
+    setState(!state)
+  }
+
   return (
     <RegisterAdminContainer>
       <ContentClose>
-        <span onClick={setState}>x</span>
+        <span onClick={onHandleClick}>x</span>
       </ContentClose>
       <div className="subContainer">
         <div className="headers">
@@ -48,7 +55,7 @@ const RegisterAdmin: React.FC<RegisterAdminProps> = ({ state, setState }) => {
             <h1>Registrar Usuario</h1>
           </section>
         </div>
-        <form className="form" onSubmit={handleSubmit(mutation.mutateAsync)}>
+        <form className="form" onSubmit={handleSubmit(onHandleSubmit)}>
           <section>
             <article>
               <InputText icon={<MdAlternateEmail />}>
@@ -57,7 +64,7 @@ const RegisterAdmin: React.FC<RegisterAdminProps> = ({ state, setState }) => {
                   className="form__field"
                   style={{ textTransform: 'lowercase' }}
                   placeholder="Email"
-                  {...register('correo', {
+                  {...register('email', {
                     required: true,
                     pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
                   })}
@@ -78,10 +85,7 @@ const RegisterAdmin: React.FC<RegisterAdminProps> = ({ state, setState }) => {
                   {...register('password', { required: true })}
                 />
                 <label className="form__label">Contraseña</label>
-                {errors.password?.type === 'pattern' && (
-                  <p>El formato del email es incorrecto</p>
-                )}
-                {errors.email?.type === 'required' && <p>Campo requerido</p>}
+                {errors.password?.type === 'required' && <p>Campo requerido</p>}
               </InputText>
             </article>
             <div className="btnSaveContent">

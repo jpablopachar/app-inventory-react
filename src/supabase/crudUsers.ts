@@ -1,8 +1,13 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { SweetAlertOptions } from 'sweetalert2'
+
 import { getIdAuthSupabase } from './globalSupabase'
+
 import { supabase } from './supabase.config'
+
+import { showAlert } from '@/utils'
 
 /**
  * Inserta un nuevo usuario en la tabla 'users' de Supabase.
@@ -19,14 +24,15 @@ export const insertUsers = async (user: any): Promise<any> => {
     .maybeSingle()
 
   if (error) {
-    /* const options: SweetAlertOptions = {
+    const options: SweetAlertOptions = {
       icon: 'error',
       title: 'Oops...',
       text: `Error al insertar el usuario: ${error.message}`,
       footer: '<a href="">error</a>',
     }
 
-    showAlert(options) */
+    showAlert(options)
+
     return null
   }
 
