@@ -35,7 +35,7 @@ export const RegisterAdminContainer = styled.div`
     }
   }
 
-  .formulario {
+  .form {
     section {
       gap: 20px;
       display: flex;
