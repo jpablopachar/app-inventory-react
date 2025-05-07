@@ -1,7 +1,5 @@
 export { default as Selector } from './Selector'
 
-export * from './SelectorStyles'
-
 export { default as BannerHome } from './BannerHome'
 
 export { default as FooterLogin } from './FooterLogin'

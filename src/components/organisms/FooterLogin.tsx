@@ -1,4 +1,4 @@
-const FooterLogin = () => {
+const FooterLogin: React.FC = () => {
   return (
     <div>FooterLogin</div>
   )

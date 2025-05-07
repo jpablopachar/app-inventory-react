@@ -9,7 +9,7 @@ import { CardCompanyDataContainer } from './CardCompanyDataStyles'
  */
 interface CardCompanyDataProps {
   title: string
-  value: string | number
+  value?: string | number
   img?: string
 }
 
