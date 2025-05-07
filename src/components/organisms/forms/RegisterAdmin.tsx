@@ -23,11 +23,36 @@ interface RegisterAdminProps {
   setState: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+/**
+ * Componente de formulario para registrar un nuevo usuario administrador (superAdmin).
+ *
+ * Este componente muestra un formulario que permite ingresar un correo electrónico y una contraseña
+ * para crear un nuevo usuario con privilegios de super administrador. Utiliza
+ * React Hook Form para la
+ * gestión y validación de los campos del formulario, y react-query para manejar
+ * la mutación de registro.
+ *
+ * Al enviar el formulario, se ejecuta la función de mutación para registrar el
+ * usuario y, en caso de éxito,
+ * se alterna el estado y se navega a la página principal. También permite cerrar
+ * el formulario mediante un botón.
+ *
+ * @component
+ * @param {RegisterAdminProps} props - Propiedades del componente.
+ * @param {boolean} props.state - Estado actual de visibilidad o alternancia del formulario.
+ * @param {React.Dispatch<React.SetStateAction<boolean>>} props.setState - Función
+ * para actualizar el estado.
+ * @returns {JSX.Element} El formulario de registro de administrador.
+ */
 const RegisterAdmin: React.FC<RegisterAdminProps> = ({ state, setState }) => {
   const navigate = useNavigate()
 
   const mutation = useMutation({
     mutationFn: addUser,
+    onSuccess: () => {
+      setState(!state)
+      navigate('/')
+    },
   })
 
   const {
@@ -36,10 +61,34 @@ const RegisterAdmin: React.FC<RegisterAdminProps> = ({ state, setState }) => {
     handleSubmit,
   } = useForm()
 
+  /**
+   * Maneja el envío del formulario de registro de administrador.
+   *
+   * @async
+   * @function
+   * @param {FieldValues} data - Los valores del formulario ingresados por el usuario.
+   * @returns {Promise<void>} No retorna ningún valor.
+   * @description
+   * Extrae el correo electrónico y la contraseña de los datos del formulario,
+   * crea un objeto de credenciales con el tipo de usuario 'superAdmin' y ejecuta la mutación
+   * para registrar al nuevo administrador.
+   */
   const onHandleSubmit = async (data: FieldValues): Promise<void> => {
-    console.log('data', data)
+    const credentials = {
+      email: data.email,
+      password: data.password,
+      userType: 'superAdmin',
+    }
+
+    mutation.mutate(credentials)
   }
 
+  /**
+   * Maneja el evento de clic para alternar el estado.
+   * Invierte el valor actual de `state` utilizando la función `setState`.
+   * 
+   * @returns {void} No retorna ningún valor.
+   */
   const onHandleClick = (): void => {
     setState(!state)
   }

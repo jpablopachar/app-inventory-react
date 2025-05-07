@@ -17,6 +17,8 @@ import { showAlert } from '@/utils'
  * null si ocurre un error.
  */
 export const insertUsers = async (user: any): Promise<any> => {
+  console.log('Insertando usuario: ', user)
+
   const { data, error } = await supabase
     .from('users')
     .insert(user)
@@ -24,6 +26,8 @@ export const insertUsers = async (user: any): Promise<any> => {
     .maybeSingle()
 
   if (error) {
+    console.error('Error al insertar el usuario: ', error)
+
     const options: SweetAlertOptions = {
       icon: 'error',
       title: 'Oops...',
@@ -35,6 +39,8 @@ export const insertUsers = async (user: any): Promise<any> => {
 
     return null
   }
+
+  console.log('Usuario insertado: ', data)
 
   return data
 }

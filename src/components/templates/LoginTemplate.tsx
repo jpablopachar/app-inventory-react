@@ -1,3 +1,4 @@
+import { useMutation } from '@tanstack/react-query'
 import { useContext, useEffect, useState } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
 import { MdOutlineInfo } from 'react-icons/md'
@@ -16,6 +17,7 @@ import { BtnSave } from '../molecules'
 import { FooterLogin, InputText, RegisterAdmin } from '../organisms'
 
 import { ThemeContext } from '@/context'
+import { loginUser } from '@/services'
 import { iconsAndVars } from '@/styles'
 
 const LoginTemplate: React.FC = () => {
@@ -25,9 +27,13 @@ const LoginTemplate: React.FC = () => {
 
   const { setThemeUse } = themeContext!
 
-  /* const mutation = useMutation({
-    mutationFn: register,
-  }) */
+  const mutation = useMutation({
+    mutationFn: loginUser,
+    onSuccess: () => {
+      setInitialState(false)
+      navigate('/')
+    },
+  })
 
   const {
     register,
@@ -41,15 +47,14 @@ const LoginTemplate: React.FC = () => {
   const [initialState, setInitialState] = useState(false)
 
   const onHandleSubmit = async (data: FieldValues): Promise<void> => {
-    console.log('data', data)
+    if (state) {
+      const credentials = {
+        email: data.email,
+        password: data.password,
+      }
 
-    /* const res = await login(data)
-
-    if (res) {
-      navigate('/')
-    } else {
-      setInitialState(!initialState)
-    } */
+      mutation.mutate(credentials)
+    }
   }
 
   useEffect(() => {

@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 import {
   SignInWithPasswordCredentials,
   SignUpWithPasswordCredentials,
@@ -22,9 +24,13 @@ import { showAlert } from '@/utils'
 export const signIn = async (
   credentials: SignInWithPasswordCredentials,
 ): Promise<User | null> => {
+  console.log('Iniciando sesión con credenciales: ', credentials)
+  
   const { data, error } = await supabase.auth.signInWithPassword(credentials)
 
   if (error) {
+    console.error('Error al iniciar sesión: ', error)
+
     const options: SweetAlertOptions = {
       icon: 'error',
       title: 'Oops...',
@@ -36,6 +42,8 @@ export const signIn = async (
 
     return null
   }
+
+  console.log('Inicio de sesión exitoso: ', data)
 
   return data.user
 }
@@ -65,9 +73,13 @@ export const logOut = async (): Promise<void> => {
 export const signUp = async (
   credentials: SignUpWithPasswordCredentials,
 ): Promise<User | null> => {
+  console.log('Registrando usuario con credenciales: ', credentials)
+
   const { data, error } = await supabase.auth.signUp(credentials)
 
   if (error) {
+    console.error('Error al registrar el usuario: ', error)
+
     const options: SweetAlertOptions = {
       icon: 'error',
       title: 'Oops...',
@@ -79,6 +91,8 @@ export const signUp = async (
 
     return null
   }
+
+  console.log('Usuario registrado: ', data)
 
   return data.user
 }
