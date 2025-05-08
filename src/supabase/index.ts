@@ -8,3 +8,7 @@ export * from './crudUsers'
 
 export * from './crudPermissions'
 
+export * from './crudCompany'
+
+export * from './crudKardex'
+
