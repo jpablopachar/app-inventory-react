@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { LayoutContainer, LayoutContainerBody } from './LayoutStyles'
 
-import { Sidebar } from '@/components'
+import { HamburguerMenu, Sidebar } from '@/components'
 
 /**
  * Propiedades para el componente de diseño principal.
@@ -40,7 +40,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           setState={() => setSidebarOpen(!sidebarOpen)}
         />
       </div>
-      <div className="ContentMenuHamburger">Menú Hamburguesa</div>
+      <div className="ContentMenuHamburger">
+        <HamburguerMenu />
+      </div>
       <LayoutContainerBody>{children}</LayoutContainerBody>
     </LayoutContainer>
   )
