@@ -6,3 +6,5 @@ export * from './organisms'
 
 export * from './templates'
 
+export { default as ToggleTheme } from './ToggleTheme'
+

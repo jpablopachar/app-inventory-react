@@ -9,3 +9,5 @@ export * from './forms'
 export * from './graphics'
 
 export * from './tables'
+
+export * from './sidebar'
