@@ -63,8 +63,6 @@ const LoginTemplate: React.FC = () => {
   } = useForm()
 
   const [state, setState] = useState(false)
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const [initialState, setInitialState] = useState(false)
 
   /**
@@ -78,7 +76,7 @@ const LoginTemplate: React.FC = () => {
    * proporcionados, y ejecuta la mutación para procesar el inicio de sesión.
    */
   const onHandleSubmit = async (data: FieldValues): Promise<void> => {
-    if (state) {
+    if (!state && !initialState) {
       const credentials = {
         email: data.email,
         password: data.password,
