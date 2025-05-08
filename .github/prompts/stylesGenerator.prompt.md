@@ -1,3 +1,7 @@
+---
+mode: 'edit'
+description: 'Generator for styled components in React TypeScript projects'
+---
 # Styled Component Generator
 
 ## Meta

@@ -1,3 +1,6 @@
+---
+applyTo: "**"
+---
 # Commit Message Generation Instructions
 
 ## Format
