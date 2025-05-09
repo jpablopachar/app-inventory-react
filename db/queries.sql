@@ -46,3 +46,39 @@ create or replace trigger byDefaultTrigger
 after insert on company
 for each row
 execute function insertByDefault();
+
+create or replace function countUsersByCompany(_companyId int)
+returns int
+language plpgsql
+as $$
+declare quantityUsers int;
+begin
+  select count(*) into quantityUsers
+  from assignCompany
+  where companyId = _companyId;
+  return quantityUsers;
+end;
+$$;
+
+countUsersByCompany(1);
+
+create or replace function showCompaniesAssignments(_userId int)
+returns jsonb
+language plpgsql
+as $$
+declare
+  result jsonb;
+begin
+  select jsonb_build_object(
+    'companyId', c.id,
+    'name', c.name,
+    'currencySymbol', c.currencySymbol
+  )
+  into result
+  from assignCompany ac
+  join company c on c.id = ac.companyId
+  where ac.userId = _userId
+  limit 1;
+  return result;
+end;
+$$;

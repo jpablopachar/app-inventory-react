@@ -24,7 +24,7 @@ export const getCompany = async (userId: string): Promise<any> => {
   console.log('Obteniendo compañía con ID de usuario: ', userId)
 
   const { data, error } = await supabase
-    .rpc('showCompaniesAssignments', { _UserId: userId })
+    .rpc('showCompaniesAssignments', { _userId: userId })
     .maybeSingle()
 
   if (error) {
@@ -63,7 +63,7 @@ export const countUsersByCompany = async (companyId: string): Promise<any> => {
   console.log('Contando usuarios por compañía con ID: ', companyId)
 
   const { data, error } = await supabase
-    .rpc('countUsersByCompany', { _CompanyId: companyId })
+    .rpc('countUsersByCompany', { _companyId: companyId })
     .maybeSingle()
 
   if (error) {
