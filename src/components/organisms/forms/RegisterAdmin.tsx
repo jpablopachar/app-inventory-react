@@ -77,7 +77,7 @@ const RegisterAdmin: React.FC<RegisterAdminProps> = ({ state, setState }) => {
     const credentials = {
       email: data.email,
       password: data.password,
-      userType: 'superAdmin',
+      userType: 'admin',
     }
 
     mutation.mutate(credentials)

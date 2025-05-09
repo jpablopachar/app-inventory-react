@@ -30,9 +30,9 @@ export const addUser = async (credentials: {
   }
 
   await insertUsers({
-    authId: res.id,
     registrationDate: new Date(),
     userType: credentials.userType,
+    authId: res.id,
   })
 
   return res
