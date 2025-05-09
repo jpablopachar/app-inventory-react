@@ -12,3 +12,5 @@ export * from './crudCompany'
 
 export * from './crudKardex'
 
+export * from './crudBrand'
+
