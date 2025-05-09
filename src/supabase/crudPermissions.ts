@@ -1,6 +1,11 @@
+/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { SweetAlertOptions } from 'sweetalert2'
+
 import { supabase } from './supabase.config'
+
+import { showAlert } from '@/utils'
 
 /**
  * Inserta nuevos permisos en la tabla 'permissions' de la base de datos utilizando Supabase.
@@ -13,19 +18,26 @@ import { supabase } from './supabase.config'
 export const insertPermissions = async (
   values: any,
 ): Promise<null | undefined> => {
+  console.log('Insertando permisos: ', values)
+
   const { error } = await supabase.from('permissions').insert(values).select()
 
   if (error) {
-    /* const options: SweetAlertOptions = {
+    console.error('Error al insertar permisos: ', error)
+
+    const options: SweetAlertOptions = {
       icon: 'error',
       title: 'Oops...',
       text: `Error al insertar el permiso: ${error.message}`,
       footer: '<a href="">error</a>',
     }
 
-    showAlert(options) */
+    showAlert(options)
+
     return null
   }
+
+  console.log('Permisos insertados correctamente')
 }
 
 /**
@@ -36,14 +48,28 @@ export const insertPermissions = async (
  * del usuario, incluyendo el id, userId, moduleId y el nombre del módulo asociado.
  */
 export const getPermissions = async (userId: string): Promise<any> => {
+  console.log('Obteniendo permisos para el usuario: ', userId)
+
   const { data, error } = await supabase
     .from('permissions')
     .select(`id, userId, moduleId, modules(name)`)
     .eq('userId', userId)
 
   if (error) {
+    console.error('Error al obtener permisos: ', error)
+    const options: SweetAlertOptions = {
+      icon: 'error',
+      title: 'Oops...',
+      text: `Error al obtener permisos: ${error.message}`,
+      footer: '<a href="">error</a>',
+    }
+
+    showAlert(options)
+
     return null
   }
+
+  console.log('Permisos obtenidos: ', data)
 
   return data
 }
@@ -58,14 +84,20 @@ export const getPermissions = async (userId: string): Promise<any> => {
 export const deletePermissions = async (
   userId: string,
 ): Promise<null | undefined> => {
+  console.log('Eliminando permisos para el usuario: ', userId)
+
   const { error } = await supabase
     .from('permissions')
     .delete()
     .eq('userId', userId)
 
   if (error) {
+    console.error('Error al eliminar permisos: ', error)
+
     alert(`Error al eliminar permisos: ${error.message}`)
 
     return null
   }
+
+  console.log('Permisos eliminados correctamente')
 }
