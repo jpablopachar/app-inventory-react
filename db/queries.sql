@@ -80,3 +80,20 @@ begin
   return result;
 end;
 $$;
+
+create or replace function insertBrand(_description text, _companyId int)
+returns void
+language plpgsql
+as $$
+begin
+  perform 1 from brand
+  where description = _description
+  and companyId = _companyId;
+  if found then
+    raise exception 'La marca ya existe para esta compañia';
+  else
+    insert into brand(description, "companyId")
+    values(_description, _companyId);
+  end if;
+end;
+$$;
