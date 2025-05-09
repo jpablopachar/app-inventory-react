@@ -56,6 +56,7 @@ interface DataConfigurationType {
   subtitle: string
   icon: string
   link: string
+  state?: boolean
 }
 
 /**
@@ -151,6 +152,7 @@ export const ThemesData: DataType[] = [
  * @property {string} subtitle - Descripción breve de la opción.
  * @property {string} icon - URL del ícono representativo.
  * @property {string} link - Ruta de navegación para acceder a la configuración.
+ * @property {boolean} [state] - Estado opcional que indica si la opción está activa o no.
  */
 export const DataConfiguration: DataConfigurationType[] = [
   {
