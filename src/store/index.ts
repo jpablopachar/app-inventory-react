@@ -7,3 +7,5 @@ export * from './PermissionsStore'
 export * from './CompanyStore'
 
 export * from './BrandStore'
+
+export * from './OperationsStore'
