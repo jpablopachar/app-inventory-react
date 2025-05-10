@@ -4,3 +4,5 @@ export { default as LoginTemplate } from './LoginTemplate'
 
 export { default as ConfigurationTemplate } from './ConfigurationTemplate'
 
+export { default as BrandTemplate } from './BrandTemplate'
+

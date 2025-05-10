@@ -4,6 +4,7 @@ import ProtectedRoute from './ProtectedRoute'
 
 import { Layout } from '@/layouts'
 import { Configuration, Home, Login } from '@/pages'
+import Brand from '@/pages/Brand'
 
 /**
  * Componente principal de rutas de la aplicación.
@@ -12,8 +13,10 @@ import { Configuration, Home, Login } from '@/pages'
  * - La ruta `/login` está protegida y solo accesible para usuarios no autenticados.
  * - La ruta `/` está protegida y solo accesible para usuarios autenticados, mostrando el
  * layout principal y la página de inicio.
- * - La ruta `/configurar` está protegida y solo accesible para usuarios autenticados, mostrando
- * la página de configuración.
+ * - La ruta `/configurar` está protegida y solo accesible para
+ * usuarios autenticados, mostrando la página de configuración.
+ * - La ruta `/configurar/marca` está protegida y solo accesible
+ * para usuarios autenticados, mostrando la página de marcas.
  *
  * @component
  */
@@ -44,6 +47,16 @@ const RoutesApp: React.FC = () => {
           <ProtectedRoute accessBy="authenticated">
             <Layout>
               <Configuration />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/configurar/marca"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <Brand />
             </Layout>
           </ProtectedRoute>
         }

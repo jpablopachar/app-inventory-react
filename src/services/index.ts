@@ -6,3 +6,5 @@ export * from './companyService'
 
 export * from './permissionsService'
 
+export * from './brandService'
+
