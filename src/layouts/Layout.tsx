@@ -4,9 +4,8 @@ import { useState } from 'react'
 import { LayoutContainer, LayoutContainerBody } from './LayoutStyles'
 
 import { HamburguerMenu, Sidebar, SpinnerLoader } from '@/components'
-import { configurePermissionsModules, showPermissions } from '@/services'
+import { configurePermissionsModules, getUsers, showPermissions } from '@/services'
 import { useCompanyStore, usePermissionsStore, useUserStore } from '@/store'
-import { getCompany, getUsers } from '@/supabase'
 
 /**
  * Propiedades para el componente de diseño principal.
@@ -48,17 +47,21 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       const res = await getUsers()
 
       showUsers(res)
+
+      return res
     },
   })
 
-  useQuery({
+  /* useQuery({
     queryKey: ['show company', { usersId: usersData?.id }],
     queryFn: async () => {
       const res = await getCompany(usersData?.id)
 
       showCompany(res)
+
+      return res
     },
-  })
+  }) */
 
   useQuery({
     queryKey: ['show permissions', { usersId: usersData?.id }],
@@ -68,6 +71,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       await configurePermissionsModules(res)
 
       getPermissions(res)
+
+      return res
     },
   })
 

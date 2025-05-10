@@ -80,7 +80,9 @@ export const insertAssignments = async (
  *
  * @async
  */
-export const getUsers = async (): Promise<any> => {
+export const showUsers = async (): Promise<any> => {
+  console.log('Obteniendo usuario...')
+
   const idAuthSupabase = await getIdAuthSupabase()
 
   console.log(`ID de Auth Supabase: ${idAuthSupabase}`)
@@ -88,14 +90,16 @@ export const getUsers = async (): Promise<any> => {
   const { data, error } = await supabase
     .from('users')
     .select()
-    .eq('idAuth', idAuthSupabase)
+    .eq('authId', idAuthSupabase)
     .maybeSingle()
 
   if (error) {
+    console.error('Error al obtener el usuario: ', error)
+
     return null
   }
 
-  console.log(`Usuarios de Supabase: ${data}`)
+  console.log('Usuarios: ', data)
 
   return data
 }

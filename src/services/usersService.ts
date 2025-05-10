@@ -1,6 +1,6 @@
 import { User } from '@supabase/supabase-js'
 
-import { insertUsers, signIn, signUp } from '@/supabase'
+import { insertUsers, showUsers, signIn, signUp } from '@/supabase'
 
 /**
  * Agrega un nuevo usuario al sistema.
@@ -34,6 +34,18 @@ export const addUser = async (credentials: {
     userType: credentials.userType,
     authId: res.id,
   })
+
+  return res
+}
+
+/**
+ * Obtiene la lista de usuarios llamando a la función showUsers.
+*
+* @returns {Promise<any>} Una promesa que resuelve con la respuesta de los usuarios.
+*/
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getUsers = async (): Promise<any> => {
+  const res = await showUsers()
 
   return res
 }

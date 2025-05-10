@@ -64,6 +64,10 @@ export const configurePermissionsModules = (permissions: any): Promise<void> => 
 
     DataConfiguration.splice(0, DataConfiguration.length)
     DataConfiguration.push(...allDocs)
+
+    // eslint-disable-next-line no-console
+    console.log('DataConfiguration:', DataConfiguration)
+
     resolve()
   })
 }
