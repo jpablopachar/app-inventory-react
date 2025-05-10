@@ -3,6 +3,34 @@
 import { create } from 'zustand'
 
 /**
+ * Interfaz para el hook UserStore, que gestiona el estado y las
+ * acciones relacionadas con los usuarios.
+ *
+ * @property {any[]} ModulesCheckData - Lista de datos
+ * relacionados con los módulos verificados para el usuario.
+ * @property {number} userId - Identificador único del usuario actual.
+ * @property {any} usersData - Lista de datos de los usuarios filtrados o visibles.
+ * @property {any[]} usersAllData - Lista completa de datos de todos los usuarios.
+ * @property {(data: any) => void} setModulesCheckData - Función
+ * para actualizar los datos de módulos verificados.
+ * @property {() => void} setUserId - Función para establecer el identificador del usuario actual.
+ * @property {(user: any) => void} showUsers - Función para
+ * mostrar los datos de un usuario específico.
+ * @property {(users: any) => void} showUsersAll - Función para
+ * mostrar los datos de todos los usuarios.
+ */
+interface UserStoreHook {
+  ModulesCheckData: any[]
+  userId: number
+  usersData: any
+  usersAllData: any[]
+  setModulesCheckData: (data: any) => void
+  setUserId: () => void
+  showUsers: (user: any) => void
+  showUsersAll: (users: any) => void
+}
+
+/**
  * Hook personalizado para gestionar el estado del usuario en la aplicación.
  *
  * Proporciona métodos y propiedades para manejar datos relacionados con usuarios,
@@ -23,7 +51,7 @@ import { create } from 'zustand'
  * - `showUsersAll`: Función para mostrar todos los usuarios,
  * actualizando el estado correspondiente.
  */
-export const useUserStore = create((set) => ({
+export const useUserStore = create<UserStoreHook>((set) => ({
   ModulesCheckData: [],
   userId: 0,
   usersData: [],

@@ -1,8 +1,12 @@
+import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 
 import { LayoutContainer, LayoutContainerBody } from './LayoutStyles'
 
-import { HamburguerMenu, Sidebar } from '@/components'
+import { HamburguerMenu, Sidebar, SpinnerLoader } from '@/components'
+import { configurePermissionsModules, showPermissions } from '@/services'
+import { useCompanyStore, usePermissionsStore, useUserStore } from '@/store'
+import { getCompany, getUsers } from '@/supabase'
 
 /**
  * Propiedades para el componente de diseño principal.
@@ -31,6 +35,49 @@ interface LayoutProps {
  */
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+
+  const { usersData, showUsers } = useUserStore()
+
+  const { showCompany } = useCompanyStore()
+
+  const { getPermissions } = usePermissionsStore()
+
+  const { isLoading, error } = useQuery({
+    queryKey: ['show users'],
+    queryFn: async () => {
+      const res = await getUsers()
+
+      showUsers(res)
+    },
+  })
+
+  useQuery({
+    queryKey: ['show company', { usersId: usersData?.id }],
+    queryFn: async () => {
+      const res = await getCompany(usersData?.id)
+
+      showCompany(res)
+    },
+  })
+
+  useQuery({
+    queryKey: ['show permissions', { usersId: usersData?.id }],
+    queryFn: async () => {
+      const res = await showPermissions(usersData?.id)
+
+      await configurePermissionsModules(res)
+
+      getPermissions(res)
+    },
+  })
+
+  if (isLoading) {
+    return <SpinnerLoader />
+  }
+
+  if (error) {
+    return <h1>Error...</h1>
+  }
 
   return (
     <LayoutContainer className={sidebarOpen ? 'active' : ''}>

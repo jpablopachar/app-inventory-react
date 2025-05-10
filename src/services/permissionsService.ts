@@ -40,31 +40,30 @@ export const removePermissions = async (userId: string): Promise<void> => {
 }
 
 /**
- * Configura el estado de los módulos de permisos según los permisos proporcionados.
+ * Configura los módulos de permisos y actualiza DataConfiguration.
+ * Devuelve una promesa que se resuelve cuando la operación finaliza.
  *
- * Esta función recorre la configuración de módulos (`DataConfiguration`) y actualiza
- * el estado (`state`) de cada módulo dependiendo de si el usuario tiene permiso para dicho módulo.
- * El estado se establece en `true` si el usuario tiene permiso, de lo contrario en `false`.
- * Finalmente, actualiza la configuración global de módulos con los nuevos estados.
- *
- * @param permissions - Lista de permisos del usuario, donde cada permiso debe contener
- * un objeto `modules` con una propiedad `name` que representa el nombre del módulo.
+ * @param {any} permissions - Permisos a configurar
+ * @returns {Promise<void>} Promesa que indica la finalización
  */
-export const configurePermissionsModules = (permissions: any): void => {
-  const allDocs: any[] = []
+export const configurePermissionsModules = (permissions: any): Promise<void> => {
+  return new Promise((resolve) => {
+    const allDocs: any[] = []
 
-  DataConfiguration.forEach((currentModule) => {
-    const permissionState = permissions.some((permission: any) =>
-      permission.modules.name.includes(currentModule.title),
-    )
+    DataConfiguration.forEach((currentModule) => {
+      const permissionState = permissions.some((permission: any) =>
+        permission.modules.name.includes(currentModule.title),
+      )
 
-    if (permissionState) {
-      allDocs.push({ ...currentModule, state: true })
-    } else {
-      allDocs.push({ ...currentModule, state: false })
-    }
+      if (permissionState) {
+        allDocs.push({ ...currentModule, state: true })
+      } else {
+        allDocs.push({ ...currentModule, state: false })
+      }
+    })
+
+    DataConfiguration.splice(0, DataConfiguration.length)
+    DataConfiguration.push(...allDocs)
+    resolve()
   })
-
-  DataConfiguration.splice(0, DataConfiguration.length)
-  DataConfiguration.push(...allDocs)
 }
