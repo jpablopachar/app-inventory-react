@@ -148,3 +148,46 @@ export const deleteAllBrands = async (userId: number): Promise<void> => {
 
   showAlert(options)
 }
+
+/**
+ * Busca marcas en la tabla 'brand' de Supabase que coincidan con
+ * el ID de la compañía y una descripción parcial.
+ *
+ * @param brand - Objeto que contiene los criterios de búsqueda,
+ * incluyendo `companyId` y `description`.
+ * @returns Una promesa que resuelve con los datos de las marcas
+ * encontradas o `null` si ocurre un error.
+ *
+ * @remarks
+ * - Utiliza el método `ilike` para realizar una búsqueda
+ * insensible a mayúsculas/minúsculas en la descripción.
+ * - Muestra una alerta con SweetAlert si ocurre un error durante la consulta.
+ */
+export const searchBrand = async (brand: any): Promise<any> => {
+  console.log('Buscando marca: ', brand)
+
+  const { data, error } = await supabase
+    .from('brand')
+    .select()
+    .eq('companyId', brand.companyId)
+    .ilike('description', `%${brand.description}%`)
+
+  if (error) {
+    console.error('Error al buscar la marca: ', error)
+
+    const options: SweetAlertOptions = {
+      icon: 'error',
+      title: 'Oops...',
+      text: `Error al buscar la marca: ${error.message}`,
+      footer: '<a href="">error</a>',
+    }
+
+    showAlert(options)
+
+    return null
+  }
+
+  console.log('Marca encontrada: ', data)
+
+  return data
+}
