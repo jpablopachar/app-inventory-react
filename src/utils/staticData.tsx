@@ -56,7 +56,7 @@ interface DataConfigurationType {
   subtitle: string
   icon: string
   link: string
-  state?: boolean
+  state: boolean
 }
 
 /**
@@ -160,30 +160,35 @@ export const DataConfiguration: DataConfigurationType[] = [
     subtitle: 'registra tus productos',
     icon: 'https://i.ibb.co/85zJ6yG/caja-del-paquete.png',
     link: '/configurar/productos',
+    state: false,
   },
   {
     title: 'Personal',
     subtitle: 'ten el control de tu personal',
     icon: 'https://i.ibb.co/5vgZ0fX/hombre.png',
     link: '/configurar/usuarios',
+    state: false,
   },
   {
     title: 'Tu empresa',
     subtitle: 'configura tus opciones básicas',
     icon: 'https://i.ibb.co/x7mHPgm/administracion-de-empresas.png',
     link: '/configurar/empresa',
+    state: false,
   },
   {
     title: 'Categoría de productos',
     subtitle: 'asigna categorías a tus productos',
     icon: 'https://i.ibb.co/VYbMRLZ/categoria.png',
     link: '/configurar/categorias',
+    state: false,
   },
   {
     title: 'Marca de productos',
     subtitle: 'gestiona tus marcas',
     icon: 'https://i.ibb.co/1qsbCRb/piensa-fuera-de-la-caja.png',
     link: '/configurar/marca',
+    state: false,
   },
 ]
 

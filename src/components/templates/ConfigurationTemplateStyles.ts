@@ -4,7 +4,7 @@ import fondoCuadros from '../../assets/fondoCuadros.svg'
 
 /**
  * Propiedades para los estilos del componente ConfigurationTemplate.
- * 
+ *
  * @property theme Objeto que contiene los colores y fondos utilizados en el tema del componente.
  * @property theme.bgTotal Color de fondo principal.
  * @property theme.bgCards Color de fondo para las tarjetas.

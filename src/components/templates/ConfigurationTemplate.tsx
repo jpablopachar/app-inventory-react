@@ -25,10 +25,10 @@ const ConfigurationTemplate: React.FC = () => {
           return (
             <Link
               to={item.state ? item.link : ''}
-              className={item.state ? 'card' : 'card false'}
+              // className={item.state ? 'card' : 'card false'}
               key={index}
             >
-              <Message state={item.state!} />
+              <Message state={item.state} />
               <div className="card-content">
                 <div className="card-image">
                   <img src={item.icon} />
