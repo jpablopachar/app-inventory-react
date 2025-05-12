@@ -18,16 +18,16 @@ import { useBrandStore, useCompanyStore } from '@/store'
  * @component
  */
 const Brand: React.FC = () => {
-  const { brandData, searcher, getBrand, searchBrand } = useBrandStore()
+  const { brandsData, searcher, getBrands, searchBrand } = useBrandStore()
 
   const { companyData } = useCompanyStore()
 
   const { isLoading, error } = useQuery({
     queryKey: ['showBrands', companyData?.id],
     queryFn: async () => {
-      const res = await showBrand(companyData?.id)
+      const res = await showBrand(companyData?.id as number)
 
-      getBrand({ companyId: companyData?.id }, res)
+      getBrands({ companyId: companyData?.id }, res)
 
       return res
     },
@@ -57,7 +57,7 @@ const Brand: React.FC = () => {
     return <div>Error...</div>
   }
 
-  return <BrandTemplate data={brandData} />
+  return <BrandTemplate data={brandsData} />
 }
 
 export default Brand

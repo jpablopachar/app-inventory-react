@@ -6,3 +6,5 @@ export * from './operations'
 
 export * from './company'
 
+export * from './brand'
+

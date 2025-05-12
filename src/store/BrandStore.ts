@@ -2,14 +2,16 @@
 
 import { create } from 'zustand'
 
+import { Brand } from '@/interfaces'
+
 /**
  * Interfaz que define el contrato para el hook de gestión de marcas en la aplicación.
  *
  * @property {string} searcher - Cadena utilizada para buscar marcas.
  * @property {(searcher: string) => void} setSearcher - Función
  * para actualizar el valor de búsqueda.
- * @property {any[]} brandData - Arreglo que contiene los datos de las marcas.
- * @property {any[]} brandItemSelect - Arreglo que contiene las marcas seleccionadas.
+ * @property {Brand[] | null} brandData - Arreglo que contiene los datos de las marcas.
+ * @property {Brand | null} brandItemSelect - Contiene la marca seleccionada.
  * @property {any} parameters - Parámetros utilizados para la búsqueda o filtrado de marcas.
  * @property {(parameters: any, brand?: any) => any} getBrand -
  * Función para obtener marcas según los parámetros y, opcionalmente, una marca específica.
@@ -22,15 +24,15 @@ import { create } from 'zustand'
 interface BrandStoreHook {
   searcher: string
   setSearcher: (searcher: string) => void
-  brandData: any[]
-  brandItemSelect: any[]
+  brandsData: Brand[] | null
+  brandItemSelect: Brand | null
   parameters: any
-  getBrand: (parameters: any, brand?: any) => any
+  getBrands: (parameters: any, brands?: Brand[] | null) => any
   selectBrand: (brand: any) => void
   insertBrand: () => void
   deleteBrand: () => void
   editBrand: () => void
-  searchBrand: (brand: any) => void
+  searchBrand: (brands: Brand[] | null) => void
 }
 
 /**
@@ -44,10 +46,10 @@ interface BrandStoreHook {
  *
  * @property {string} searcher - Texto actual de búsqueda de marcas.
  * @property {(searcher: string) => void} setSearcher - Actualiza el texto de búsqueda.
- * @property {any[]} brandData - Lista de datos de marcas disponibles.
- * @property {any[]} brandItemSelect - Marca seleccionada actualmente.
+ * @property {Brand[] | null} brandsData - Lista de datos de marcas disponibles.
+ * @property {Brand | null} brandItemSelect - Marca seleccionada actualmente.
  * @property {object} parameters - Parámetros utilizados para filtrar o buscar marcas.
- * @property getBrand - Obtiene y actualiza la lista de marcas y la marca seleccionada.
+ * @property getBrands - Obtiene y actualiza la lista de marcas y la marca seleccionada.
  * @property {(brand: any) => void} selectBrand - Selecciona una marca específica.
  * @property {() => void} insertBrand - Inserta una nueva marca y actualiza el estado.
  * @property {() => void} deleteBrand - Elimina una marca y actualiza el estado.
@@ -57,31 +59,35 @@ interface BrandStoreHook {
 export const useBrandStore = create<BrandStoreHook>((set, get) => ({
   searcher: '',
   setSearcher: (searcher: string) => set({ searcher }),
-  brandData: [],
-  brandItemSelect: [],
+  brandsData: null,
+  brandItemSelect: null,
   parameters: {},
-  getBrand: (parameters: any, brand?: any) => {
+  getBrands: (parameters: any, brands?: Brand[] | null) => {
     set({ parameters })
-    set({ brandData: brand })
-    set({ brandItemSelect: brand?.[0] || null })
+    set({ brandsData: brands })
+    set({ brandItemSelect: brands?.[0] || null })
 
-    return { brandData: brand, brandItemSelect: brand?.[0] || null, parameters }
+    return {
+      brandData: brands,
+      brandItemSelect: brands?.[0] || null,
+      parameters,
+    }
   },
   selectBrand: (brand: any) => set({ brandItemSelect: brand }),
   insertBrand: () => {
-    const { getBrand, parameters } = get()
+    const { getBrands, parameters } = get()
 
-    set(getBrand(parameters))
+    set(getBrands(parameters))
   },
   deleteBrand: () => {
-    const { getBrand, parameters } = get()
+    const { getBrands, parameters } = get()
 
-    set(getBrand(parameters))
+    set(getBrands(parameters))
   },
   editBrand: () => {
-    const { getBrand, parameters } = get()
+    const { getBrands, parameters } = get()
 
-    set(getBrand(parameters))
+    set(getBrands(parameters))
   },
-  searchBrand: (brand: any) => set({ brandData: brand }),
+  searchBrand: (brands: Brand[] | null) => set({ brandsData: brands }),
 }))

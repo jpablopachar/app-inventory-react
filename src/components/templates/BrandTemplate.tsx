@@ -1,3 +1,5 @@
+import { Brand } from '@/interfaces'
+
 /**
  * Propiedades para el componente BrandTemplate.
  * 
@@ -5,7 +7,7 @@
  * El tipo puede ser especificado según la estructura de los datos utilizados.
  */
 interface BrandTemplateProps {
-  data: any
+  data: Brand[] | null
 }
 
 const BrandTemplate: React.FC<BrandTemplateProps> = ({ data }) => {
