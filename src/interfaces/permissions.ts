@@ -10,3 +10,18 @@ export interface Permissions {
   name: string
   check: boolean
 }
+
+/**
+ * Representa un permiso asignado a un usuario para un módulo específico.
+ *
+ * @property {number} id - Identificador único del permiso.
+ * @property {number} moduleId - Identificador del módulo al que pertenece el permiso.
+ * @property {{ name: string }} modules - Objeto que contiene el nombre del módulo.
+ * @property {number} userId - Identificador del usuario al que se le asigna el permiso.
+ */
+export interface Permission {
+  id: number
+  moduleId: number
+  modules: { name: string }
+  userId: number
+}

@@ -44,10 +44,12 @@ export const insertPermissions = async (
  * Obtiene los permisos asociados a un usuario específico desde la base de datos.
  *
  * @param userId - El identificador único del usuario para el cual se desean obtener los permisos.
- * @returns Una promesa que resuelve con los datos de los permisos
- * del usuario, incluyendo el id, userId, moduleId y el nombre del módulo asociado.
+ * @returns Una promesa que resuelve a un arreglo de permisos o `null` si ocurre un error.
+ * @throws Muestra una alerta si ocurre un error durante la obtención de los permisos.
  */
-export const getPermissions = async (userId: string): Promise<any> => {
+export const getPermissions = async (
+  userId: string,
+): Promise<any> => {
   console.log('Obteniendo permisos para el usuario: ', userId)
 
   const { data, error } = await supabase
@@ -57,6 +59,7 @@ export const getPermissions = async (userId: string): Promise<any> => {
 
   if (error) {
     console.error('Error al obtener permisos: ', error)
+
     const options: SweetAlertOptions = {
       icon: 'error',
       title: 'Oops...',

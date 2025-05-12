@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { LayoutContainer, LayoutContainerBody } from './LayoutStyles'
 
 import { HamburguerMenu, Sidebar, SpinnerLoader } from '@/components'
+import { Permission } from '@/interfaces'
 import {
   configurePermissionsModules,
   getUsers,
@@ -77,7 +78,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     queryFn: async () => {
       const res = await showPermissions(usersData?.id)
 
-      await configurePermissionsModules(res)
+      await configurePermissionsModules(res as Permission[])
 
       getPermissions(res)
 

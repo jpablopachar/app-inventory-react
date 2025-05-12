@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { Permission } from '@/interfaces'
 import {
   deletePermissions,
   getPermissions,
@@ -21,10 +22,10 @@ export const addPermissions = async (permissions: any): Promise<void> => {
  * Obtiene y retorna los permisos asociados a un usuario específico.
  *
  * @param userId - El identificador único del usuario cuyos permisos se desean consultar.
- * @returns Una promesa que resuelve con los permisos del usuario.
+ * @returns Una promesa que resuelve a un arreglo de permisos o `null` si no se encuentran permisos.
  */
-export const showPermissions = async (userId: string): Promise<any> => {
-  const res = await getPermissions(userId)
+export const showPermissions = async (userId: string): Promise<Permission[] | null> => {
+  const res: Permission[] | null = await getPermissions(userId)
 
   return res
 }
@@ -43,10 +44,10 @@ export const removePermissions = async (userId: string): Promise<void> => {
  * Configura los módulos de permisos y actualiza DataConfiguration.
  * Devuelve una promesa que se resuelve cuando la operación finaliza.
  *
- * @param {any} permissions - Permisos a configurar
+ * @param {Permission[]} permissions - Permisos a configurar
  * @returns {Promise<void>} Promesa que indica la finalización
  */
-export const configurePermissionsModules = (permissions: any): Promise<void> => {
+export const configurePermissionsModules = (permissions: Permission[]): Promise<void> => {
   return new Promise((resolve) => {
     const allDocs: any[] = []
 
