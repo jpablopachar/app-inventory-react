@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Brand } from '@/interfaces'
-import { getBrand, searchBrand } from '@/supabase'
+import { editBrand, getBrand, insertBrand, searchBrand } from '@/supabase'
 
 /**
  * Obtiene la información de una marca específica según el ID de la compañía.
@@ -26,4 +26,24 @@ export const seekBrand = async (brand: any): Promise<Brand[] | null> => {
   const res: Brand[] | null = await searchBrand(brand)
 
   return res
+}
+
+/**
+ * Agrega una nueva marca a la base de datos.
+ *
+ * @param brand - Objeto que representa la marca a insertar.
+ * @returns Una promesa que se resuelve cuando la marca ha sido agregada exitosamente.
+ */
+export const addBrand = async (brand: any): Promise<void> => {
+  await insertBrand(brand)
+}
+
+/**
+ * Actualiza una marca existente.
+ *
+ * @param brand - Objeto que representa la marca a editar.
+ * @returns Una promesa que se resuelve cuando la edición ha finalizado.
+ */
+export const updateBrand = async (brand: any): Promise<void> => {
+  await editBrand(brand)
 }

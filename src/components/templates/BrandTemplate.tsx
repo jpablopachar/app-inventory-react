@@ -42,7 +42,7 @@ const BrandTemplate: React.FC<BrandTemplateProps> = ({ data }) => {
   const [state, setState] = useState(false)
   const [openRegister, setOpenRegister] = useState(false)
   const [action, setAction] = useState('')
-  const [dataSelect, setDataSelect] = useState([])
+  const [dataSelect, setDataSelect] = useState<Brand | null>(null)
 
   /**
    * Abre o cierra el formulario de registro de una nueva marca.
@@ -54,7 +54,7 @@ const BrandTemplate: React.FC<BrandTemplateProps> = ({ data }) => {
   const newRegister = (): void => {
     setOpenRegister(!openRegister)
     setAction('New')
-    setDataSelect([])
+    setDataSelect(null)
   }
 
   return (
