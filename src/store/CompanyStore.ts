@@ -2,22 +2,25 @@
 
 import { create } from 'zustand'
 
+import { Company } from '@/interfaces'
+
 /**
  * Interfaz que define el hook para el manejo del estado de la compañía.
  *
  * @interface CompanyStoreHook
  *
  * @property {any} userCounter - Almacena el conteo de usuarios por compañía.
- * @property {any} companyData - Contiene los datos de las compañías.
- * @property {(data: any) => void} getCompany - Función para
+ * @property {Company | null} companyData - Contiene los datos de
+ * la compañía o null si no se encuentra.
+ * @property {(data: Company | null) => void} getCompany - Función para
  * obtener los datos de una compañía específica.
  * @property {(data: any) => void} countUsersByCompany - Función para contar los
  * usuarios asociados a una compañía específica.
  */
 interface CompanyStoreHook {
   userCounter: any
-  companyData: any
-  getCompany: (data: any) => void
+  companyData: Company | null
+  getCompany: (data: Company | null) => void
   countUsersByCompany: (data: any) => void
 }
 
@@ -36,6 +39,6 @@ interface CompanyStoreHook {
 export const useCompanyStore = create<CompanyStoreHook>((set) => ({
   userCounter: null,
   companyData: null,
-  getCompany: (data: any) => set({ companyData: data }),
+  getCompany: (data: Company | null) => set({ companyData: data }),
   countUsersByCompany: (data: any) => set({ userCounter: data }),
 }))

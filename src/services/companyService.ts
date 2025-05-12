@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { Company } from '@/interfaces'
 import { countUsersByCompany, getCompany } from '@/supabase'
 
 /**
  * Obtiene la información de una compañía asociada a un usuario específico.
  *
  * @param userId - El identificador único del usuario cuya compañía se desea obtener.
- * @returns Una promesa que resuelve con los datos de la compañía.
+ * @returns Una promesa que resuelve con la información de la compañía o null si no se encuentra.
  */
-export const showCompany = async (userId: number): Promise<any> => {
-  const res = await getCompany(userId)
+export const showCompany = async (userId: number): Promise<Company | null> => {
+  const res: Company | null = await getCompany(userId)
 
   return res
 }
