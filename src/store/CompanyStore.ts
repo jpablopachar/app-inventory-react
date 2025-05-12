@@ -9,15 +9,15 @@ import { create } from 'zustand'
  *
  * @property {any} userCounter - Almacena el conteo de usuarios por compañía.
  * @property {any} companyData - Contiene los datos de las compañías.
- * @property {(data: any) => void} showCompany - Función para mostrar los datos de
- * una compañía específica.
+ * @property {(data: any) => void} getCompany - Función para
+ * obtener los datos de una compañía específica.
  * @property {(data: any) => void} countUsersByCompany - Función para contar los
  * usuarios asociados a una compañía específica.
  */
 interface CompanyStoreHook {
   userCounter: any
   companyData: any
-  showCompany: (data: any) => void
+  getCompany: (data: any) => void
   countUsersByCompany: (data: any) => void
 }
 
@@ -27,7 +27,7 @@ interface CompanyStoreHook {
  * @typedef {Object} CompanyStoreHook
  * @property {any} userCounter - Almacena el conteo de usuarios por compañía.
  * @property {any} companyData - Almacena los datos de la compañía seleccionada.
- * @property {(data: any) => void} showCompany - Actualiza los datos de la compañía en el estado.
+ * @property {(data: any) => void} getCompany - Obtiene los datos de la compañía en el estado.
  * @property {(data: any) => void} countUsersByCompany - Actualiza el conteo de
  * usuarios por compañía en el estado.
  *
@@ -36,6 +36,6 @@ interface CompanyStoreHook {
 export const useCompanyStore = create<CompanyStoreHook>((set) => ({
   userCounter: null,
   companyData: null,
-  showCompany: (data: any) => set({ companyData: data }),
+  getCompany: (data: any) => set({ companyData: data }),
   countUsersByCompany: (data: any) => set({ userCounter: data }),
 }))

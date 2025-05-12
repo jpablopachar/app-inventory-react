@@ -23,8 +23,14 @@ import { showAlert } from '@/utils'
 export const getCompany = async (userId: string): Promise<any> => {
   console.log('Obteniendo compañía con ID de usuario: ', userId)
 
-  const { data, error } = await supabase
+  /* const { data, error } = await supabase
     .rpc('showcompaniesassignments', { _userId: userId })
+    .maybeSingle() */
+
+  const { data, error } = await supabase
+    .from('company')
+    .select()
+    .eq('userId', userId)
     .maybeSingle()
 
   if (error) {

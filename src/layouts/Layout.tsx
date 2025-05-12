@@ -7,9 +7,10 @@ import { HamburguerMenu, Sidebar, SpinnerLoader } from '@/components'
 import {
   configurePermissionsModules,
   getUsers,
+  showCompany,
   showPermissions,
 } from '@/services'
-import { usePermissionsStore, useUserStore } from '@/store'
+import { useCompanyStore, usePermissionsStore, useUserStore } from '@/store'
 
 /**
  * Propiedades para el componente de diseño principal.
@@ -22,26 +23,29 @@ interface LayoutProps {
 }
 
 /**
- * Componente de diseño principal para la aplicación.
+ * Componente de layout principal para la aplicación.
+ *
+ * Este componente se encarga de gestionar la estructura general de la interfaz,
+ * incluyendo la barra lateral (Sidebar), el menú hamburguesa y el contenedor principal
+ * donde se renderizan los hijos recibidos como prop.
+ *
+ * Además, realiza la carga inicial de datos del usuario, la empresa y los permisos
+ * utilizando React Query y los almacena en los stores correspondientes.
  *
  * @component
  * @param {LayoutProps} props - Propiedades del componente.
- * @param {React.ReactNode} props.children - Elementos secundarios
- * que se renderizan dentro del cuerpo del layout.
- * @returns {JSX.Element} El contenedor de layout con barra
- * lateral, menú hamburguesa y contenido principal.
+ * @param {React.ReactNode} props.children - Elementos hijos que
+ * serán renderizados dentro del layout.
  *
- * @description
- * Este componente gestiona la estructura general de la aplicación, incluyendo una barra lateral,
- * un menú tipo hamburguesa y el área principal donde se renderizan los hijos recibidos por props.
- * El estado `sidebarOpen` controla si la barra lateral está activa o no.
+ * @returns {JSX.Element} El layout de la aplicación con la barra
+ * lateral, menú y contenido principal.
  */
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const { usersData, showUsers } = useUserStore()
 
-  // const { showCompany } = useCompanyStore()
+  const { getCompany } = useCompanyStore()
 
   const { getPermissions } = usePermissionsStore()
 
@@ -56,20 +60,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     },
   })
 
-  /* useQuery({
-    queryKey: ['show company', { usersId: usersData?.id }],
+  const { isSuccess: isSuccessCompany } = useQuery({
+    queryKey: ['show company', { userId: usersData?.id }],
     queryFn: async () => {
-      const res = await getCompany(usersData?.id)
+      const res = await showCompany(usersData?.id)
 
-      showCompany(res)
+      getCompany(res)
 
       return res
     },
     enabled: !!usersData?.id && isSuccess,
-  }) */
+  })
 
   useQuery({
-    queryKey: ['show permissions', { usersId: usersData?.id }],
+    queryKey: ['show permissions', { userId: usersData?.id }],
     queryFn: async () => {
       const res = await showPermissions(usersData?.id)
 
@@ -79,7 +83,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       return res
     },
-    enabled: !!usersData?.id && isSuccess,
+    enabled: !!usersData?.id && isSuccessCompany,
   })
 
   if (isLoading) {

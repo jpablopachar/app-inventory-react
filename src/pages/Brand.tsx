@@ -28,8 +28,10 @@ const Brand: React.FC = () => {
       const res = await showBrand(companyData?.id)
 
       getBrand({ companyId: companyData?.id }, res)
+
+      return res
     },
-    enabled: companyData?.id !== null,
+    enabled: !!companyData?.id,
   })
 
   useQuery({
@@ -41,8 +43,10 @@ const Brand: React.FC = () => {
       })
 
       searchBrand(res)
+
+      return res
     },
-    enabled: companyData?.id !== null,
+    enabled: !!companyData?.id,
   })
 
   if (isLoading) {
