@@ -16,6 +16,18 @@ interface HeaderProps {
   }
 }
 
+/**
+ * Componente Header.
+ *
+ * Este componente representa el encabezado de la aplicación. 
+ * Recibe la configuración del estado como propiedad y la pasa al componente `DataUser`.
+ *
+ * @component
+ * @param {HeaderProps} props - Propiedades del componente.
+ * @param {any} props.stateConfig - Configuración del estado que
+ * se utiliza para mostrar la información del usuario.
+ * @returns {JSX.Element} El encabezado renderizado.
+ */
 const Header: React.FC<HeaderProps> = ({ stateConfig }) => {
   return (
     <ContentHeaderStyles>
