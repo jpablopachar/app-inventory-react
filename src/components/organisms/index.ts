@@ -8,6 +8,8 @@ export { default as Header } from './Header'
 
 export { default as Searcher } from './Searcher'
 
+export { default as DataUser } from './DataUser'
+
 export * from './forms'
 
 export * from './graphics'

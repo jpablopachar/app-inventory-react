@@ -1,3 +1,7 @@
+import DataUser from './DataUser'
+
+import { ContentHeaderStyles } from '../atoms'
+
 /**
  * Propiedades para el componente Header.
  *
@@ -13,7 +17,13 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ stateConfig }) => {
-  return <div>Header</div>
+  return (
+    <ContentHeaderStyles>
+      <div>
+        <DataUser stateConfig={stateConfig} />
+      </div>
+    </ContentHeaderStyles>
+  )
 }
 
 export default Header

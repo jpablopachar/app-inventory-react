@@ -3,7 +3,7 @@ import { BtnCircularContainer } from './BtnCircularStyles'
 /**
  * Propiedades para el componente BtnCircular.
  *
- * @property {string} icon - Nombre o identificador del icono a mostrar en el botón.
+ * @property {React.ReactNode} icon - Nombre o identificador del icono a mostrar en el botón.
  * @property {string} width - Ancho del botón (por ejemplo, '40px', '2rem').
  * @property {string} height - Alto del botón (por ejemplo, '40px', '2rem').
  * @property {string} bgColor - Color de fondo del botón (puede ser
@@ -14,7 +14,7 @@ import { BtnCircularContainer } from './BtnCircularStyles'
  * @property {string} translateY - Valor de transformación vertical (por ejemplo, '10px', '50%').
  */
 interface BtnCircularProps {
-  icon: string
+  icon: React.ReactNode
   width: string
   height: string
   bgColor: string
