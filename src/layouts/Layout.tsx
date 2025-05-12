@@ -44,7 +44,7 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  const { usersData, showUsers } = useUserStore()
+  const { userData, showUsers } = useUserStore()
 
   const { getCompany } = useCompanyStore()
 
@@ -61,22 +61,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     },
   })
 
-  const { isSuccess: isSuccessCompany } = useQuery({
-    queryKey: ['show company', { userId: usersData?.id }],
+  useQuery({
+    queryKey: ['show company', { userId: userData?.id }],
     queryFn: async () => {
-      const res = await showCompany(usersData?.id)
+      const res = await showCompany(userData?.id as number)
 
       getCompany(res)
 
       return res
     },
-    enabled: !!usersData?.id && isSuccess,
+    enabled: !!userData?.id && isSuccess,
   })
 
   useQuery({
-    queryKey: ['show permissions', { userId: usersData?.id }],
+    queryKey: ['show permissions', { userId: userData?.id }],
     queryFn: async () => {
-      const res = await showPermissions(usersData?.id)
+      const res = await showPermissions(userData?.id as number)
 
       await configurePermissionsModules(res as Permission[])
 
@@ -84,7 +84,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       return res
     },
-    enabled: !!usersData?.id && isSuccessCompany,
+    enabled: !!userData?.id && isSuccess,
   })
 
   if (isLoading) {

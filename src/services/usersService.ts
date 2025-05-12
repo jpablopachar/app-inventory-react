@@ -1,5 +1,6 @@
 import { User } from '@supabase/supabase-js'
 
+import { UserData } from '@/interfaces'
 import { insertUsers, showUsers, signIn, signUp } from '@/supabase'
 
 /**
@@ -39,13 +40,14 @@ export const addUser = async (credentials: {
 }
 
 /**
- * Obtiene la lista de usuarios llamando a la función showUsers.
-*
-* @returns {Promise<any>} Una promesa que resuelve con la respuesta de los usuarios.
-*/
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getUsers = async (): Promise<any> => {
-  const res = await showUsers()
+ * Obtiene la lista de usuarios llamando a la función `showUsers`.
+ *
+ * @returns {Promise<UserData | null>} Una promesa que resuelve
+ * con los datos de usuario (`UserData`)
+ * o `null` si no se obtienen datos.
+ */
+export const getUsers = async (): Promise<UserData | null> => {
+  const res: UserData | null = await showUsers()
 
   return res
 }

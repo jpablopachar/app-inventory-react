@@ -24,7 +24,7 @@ export const addPermissions = async (permissions: any): Promise<void> => {
  * @param userId - El identificador único del usuario cuyos permisos se desean consultar.
  * @returns Una promesa que resuelve a un arreglo de permisos o `null` si no se encuentran permisos.
  */
-export const showPermissions = async (userId: string): Promise<Permission[] | null> => {
+export const showPermissions = async (userId: number): Promise<Permission[] | null> => {
   const res: Permission[] | null = await getPermissions(userId)
 
   return res

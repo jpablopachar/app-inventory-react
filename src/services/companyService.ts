@@ -8,7 +8,7 @@ import { countUsersByCompany, getCompany } from '@/supabase'
  * @param userId - El identificador único del usuario cuya compañía se desea obtener.
  * @returns Una promesa que resuelve con los datos de la compañía.
  */
-export const showCompany = async (userId: string): Promise<any> => {
+export const showCompany = async (userId: number): Promise<any> => {
   const res = await getCompany(userId)
 
   return res

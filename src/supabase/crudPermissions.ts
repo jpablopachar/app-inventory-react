@@ -48,7 +48,7 @@ export const insertPermissions = async (
  * @throws Muestra una alerta si ocurre un error durante la obtención de los permisos.
  */
 export const getPermissions = async (
-  userId: string,
+  userId: number,
 ): Promise<any> => {
   console.log('Obteniendo permisos para el usuario: ', userId)
 

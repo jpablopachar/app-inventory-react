@@ -20,7 +20,7 @@ import { showAlert } from '@/utils'
  * - Utiliza la función remota `showCompaniesAssignments` en Supabase.
  * - Registra en consola el proceso de obtención y cualquier error encontrado.
  */
-export const getCompany = async (userId: string): Promise<any> => {
+export const getCompany = async (userId: number): Promise<any> => {
   console.log('Obteniendo compañía con ID de usuario: ', userId)
 
   /* const { data, error } = await supabase
