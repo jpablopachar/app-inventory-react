@@ -142,3 +142,49 @@ begin
   end if;
 end;
 $$;
+
+create or replace function show_products(_company_id int)
+returns table(
+  id int,
+  description text,
+  "brandId" int,
+  stock numeric,
+  "minStock" numeric,
+  "barCode" text,
+  "internalCode" text,
+  "salePrice" numeric,
+  "purchasePrice" numeric,
+  "categoryId" int,
+  "companyId" int,
+  brand text,
+  category text,
+  color text
+)
+language sql
+as $$
+select p.id, p.description, p."brandId", p.stock, p."minStock", p."barCode", p."internalCode", p."salePrice", p."purchasePrice", p."categoryId", p."companyId", b.description as brand, c.description as category, c.color from products p inner join categories c on c.id = p."categoryId" inner join brand b on b.id = p."brandId"
+where p."companyId" = _company_id;
+$$;
+
+create or replace function search_products(_company_id int, _searcher text)
+returns table(
+  id int,
+  description text,
+  "brandId" int,
+  stock numeric,
+  "minStock" numeric,
+  "barCode" text,
+  "internalCode" text,
+  "salePrice" numeric,
+  "purchasePrice" numeric,
+  "categoryId" int,
+  "companyId" int,
+  brand text,
+  category text,
+  color text
+)
+language sql
+as $$
+select p.id, p.description, p."brandId", p.stock, p."minStock", p."barCode", p."internalCode", p."salePrice", p."purchasePrice", p."categoryId", p."companyId", b.description as brand, c.description as category, c.color from products p inner join categories c on c.id = p."categoryId" inner join brand b on b.id = p."brandId"
+where p.description LIKE '%' || _searcher || '%' and p."companyId" = _company_id;
+$$;
