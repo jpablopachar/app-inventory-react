@@ -8,3 +8,5 @@ export * from './permissionsService'
 
 export * from './brandService'
 
+export * from './categoryService'
+

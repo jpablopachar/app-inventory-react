@@ -8,3 +8,5 @@ export * from './company'
 
 export * from './brand'
 
+export * from './category'
+
