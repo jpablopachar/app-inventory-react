@@ -10,4 +10,6 @@ export * from './BrandStore'
 
 export * from './CategoryStore'
 
+export * from './ProductStore'
+
 export * from './OperationsStore'
