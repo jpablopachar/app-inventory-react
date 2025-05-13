@@ -88,12 +88,30 @@ as $$
 begin
   perform 1 from brand
   where description = _description
-  and companyId = _companyId;
+  and "companyId" = _companyId;
   if found then
     raise exception 'La marca ya existe para esta compañia';
   else
     insert into brand(description, "companyId")
     values(_description, _companyId);
+  end if;
+end;
+$$;
+
+create or replace function insert_categories(_description text, _color text, _companyId int)
+returns void
+language plpgsql
+as $$
+begin
+  perform 1 from categories
+  where description = _description
+  and color = _color
+  and "companyId" = _companyId;
+  if found then
+    raise exception 'La categoría ya existe para esta compañia';
+  else
+    insert into categories(description, color, "companyId")
+    values(_description, _color, _companyId);
   end if;
 end;
 $$;
