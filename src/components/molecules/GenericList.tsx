@@ -17,7 +17,7 @@ import BtnClose from '../atoms/BtnClose'
  * estilo en la parte inferior de la lista.
  */
 interface GenericListProps {
-  data: any[]
+  data: any[] | null
   setState: () => void
   task: (item: any) => void
   scroll: string

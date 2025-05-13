@@ -11,3 +11,5 @@ export { default as RegisterAdmin } from './RegisterAdmin'
 export { default as RegisterBrand } from './RegisterBrand'
 
 export { default as RegisterCategory } from './RegisterCategory'
+
+export { default as RegisterProduct } from './RegisterProduct'

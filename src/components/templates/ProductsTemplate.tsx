@@ -6,7 +6,7 @@ import { ContentFilter, TemplateContainer } from './TemplateStyles'
 import vacio from '../../assets/vacio.json'
 import { TitleStyles } from '../atoms'
 import { AnimationLottie, BtnFilter } from '../molecules'
-import { Header, ProductsTable, Searcher } from '../organisms'
+import { Header, ProductsTable, RegisterProduct, Searcher } from '../organisms'
 
 import { Product } from '@/interfaces'
 import { useProductStore } from '@/store'
@@ -46,13 +46,13 @@ const ProductsTemplate: React.FC<ProductsTemplateProps> = ({ data }) => {
 
   return (
     <TemplateContainer>
-      {/* {openRegister && (
-        <RegisterCategory
+      {openRegister && (
+        <RegisterProduct
           dataSelect={dataSelect}
           onClose={() => setOpenRegister(!openRegister)}
           action={action}
         />
-      )} */}
+      )}
       <header className="header">
         <Header
           stateConfig={{ state: state, setState: () => setState(!state) }}

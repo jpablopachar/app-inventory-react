@@ -94,7 +94,7 @@ export const getProducts = async (companyId: number): Promise<any> => {
 export const deleteProduct = async (productId: number): Promise<void> => {
   console.log('Eliminando producto: ', productId)
 
-  const { error } = await supabase.from('product').delete().eq('id', productId)
+  const { error } = await supabase.from('products').delete().eq('id', productId)
 
   if (error) {
     console.error('Error al eliminar el producto: ', error)
@@ -122,7 +122,7 @@ export const editProduct = async (product: any): Promise<void> => {
   console.log('Actualizando producto: ', product)
 
   const { error } = await supabase
-    .from('product')
+    .from('products')
     .update(product)
     .eq('id', product.id)
 
@@ -150,7 +150,7 @@ export const editProduct = async (product: any): Promise<void> => {
 export const deleteAllProducts = async (userId: number): Promise<void> => {
   console.log('Eliminando todos los productos para el usuario: ', userId)
 
-  const { error } = await supabase.from('product').delete().eq('userId', userId)
+  const { error } = await supabase.from('products').delete().eq('userId', userId)
 
   if (error) {
     console.error('Error al eliminar todos los productos: ', error)
