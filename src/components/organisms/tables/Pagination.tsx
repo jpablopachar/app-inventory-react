@@ -2,7 +2,6 @@ import { Table } from '@tanstack/react-table'
 
 import { PaginationContainer } from './PaginationStyles'
 
-import { Brand } from '@/interfaces'
 import { useOperationsStore } from '@/store'
 import { iconsAndVars } from '@/styles'
 
@@ -12,7 +11,8 @@ import { iconsAndVars } from '@/styles'
  * @property table - Instancia de la tabla que contiene los datos y el estado de paginación.
  */
 interface PaginationProps {
-  table: Table<Brand>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  table: Table<any>
 }
 
 /**

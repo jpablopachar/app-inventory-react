@@ -5,6 +5,7 @@ import ProtectedRoute from './ProtectedRoute'
 import { Layout } from '@/layouts'
 import { Configuration, Home, Login } from '@/pages'
 import Brand from '@/pages/Brand'
+import Category from '@/pages/Category'
 
 /**
  * Componente principal de rutas de la aplicación.
@@ -47,6 +48,16 @@ const RoutesApp: React.FC = () => {
           <ProtectedRoute accessBy="authenticated">
             <Layout>
               <Configuration />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/configurar/categorias"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <Category />
             </Layout>
           </ProtectedRoute>
         }
