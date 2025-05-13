@@ -8,4 +8,6 @@ export * from './CompanyStore'
 
 export * from './BrandStore'
 
+export * from './CategoryStore'
+
 export * from './OperationsStore'
