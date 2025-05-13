@@ -8,3 +8,5 @@ export { default as BrandTemplate } from './BrandTemplate'
 
 export { default as CategoryProTemplate } from './CategoryProTemplate'
 
+export { default as ProductsTemplate } from './ProductsTemplate'
+

@@ -3,9 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 
 import { Layout } from '@/layouts'
-import { Configuration, Home, Login } from '@/pages'
-import Brand from '@/pages/Brand'
-import Category from '@/pages/Category'
+import { Brand, Category, Configuration, Home, Login, Products } from '@/pages'
 
 /**
  * Componente principal de rutas de la aplicación.
@@ -58,6 +56,16 @@ const RoutesApp: React.FC = () => {
           <ProtectedRoute accessBy="authenticated">
             <Layout>
               <Category />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/configurar/productos"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <Products />
             </Layout>
           </ProtectedRoute>
         }
