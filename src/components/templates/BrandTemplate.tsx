@@ -89,7 +89,7 @@ const BrandTemplate: React.FC<BrandTemplateProps> = ({ data }) => {
           <AnimationLottie height="300" width="300" animation={vacio} />
         )}
         <BrandsTable
-          data={data}
+          brands={data}
           setOpenRegister={setOpenRegister}
           setDataSelect={setDataSelect}
           setAction={setAction}

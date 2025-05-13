@@ -84,6 +84,32 @@ export const getBrand = async (companyId: number): Promise<any> => {
 }
 
 /**
+ * Elimina una marca específica de la base de datos utilizando Supabase.
+ *
+ * @param brandId - El identificador único de la marca a eliminar.
+ * @returns Una promesa que se resuelve cuando la operación de eliminación ha finalizado.
+ *
+ * @remarks
+ * Si ocurre un error durante la eliminación, se muestra una
+ * alerta con el mensaje de error y se registra en la consola.
+ */
+export const deleteBrand = async (brandId: number): Promise<void> => {
+  console.log('Eliminando marca: ', brandId)
+
+  const { error } = await supabase.from('brand').delete().eq('id', brandId)
+
+  if (error) {
+    console.error('Error al eliminar la marca: ', error)
+
+    alert(`Error al eliminar la marca: ${error.message}`)
+
+    return
+  }
+
+  console.log('Marca eliminada correctamente')
+}
+
+/**
  * Actualiza una marca existente en la base de datos utilizando Supabase.
  *
  * @param brand - Objeto que representa la marca a actualizar.

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Brand } from '@/interfaces'
-import { editBrand, getBrand, insertBrand, searchBrand } from '@/supabase'
+import { deleteBrand, editBrand, getBrand, insertBrand, searchBrand } from '@/supabase'
 
 /**
  * Obtiene la información de una marca específica según el ID de la compañía.
@@ -46,4 +46,14 @@ export const addBrand = async (brand: any): Promise<void> => {
  */
 export const updateBrand = async (brand: any): Promise<void> => {
   await editBrand(brand)
+}
+
+/**
+ * Elimina una marca específica de la base de datos.
+ *
+ * @param brandId - El identificador numérico de la marca a eliminar.
+ * @returns Una promesa que se resuelve cuando la eliminación ha finalizado.
+ */
+export const removeBrand = async (brandId: number): Promise<void> => {
+  await deleteBrand(brandId)
 }
