@@ -12,8 +12,8 @@ export { default as DataUser } from './DataUser'
 
 export * from './forms'
 
-export * from './graphics'
-
 export * from './tables'
+
+export * from './graphics'
 
 export * from './sidebar'
