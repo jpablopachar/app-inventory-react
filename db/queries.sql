@@ -115,3 +115,30 @@ begin
   end if;
 end;
 $$;
+
+create or replace function insert_products(_description text, _brand_id int, _stock numeric, _min_stock numeric, _bar_code text, _internal_code text, _sale_price numeric, _purchase_price numeric, _category_id int, _company_id int)
+returns void
+language plpgsql
+as $$
+begin
+  perform 1 from products
+  where description = _description
+  and "brandId" = _brand_id
+  and stock = _stock
+  and "minStock" = _min_stock
+  and "barCode" = _bar_code
+  and "internalCode" = _internal_code
+  and "salePrice" = _sale_price
+  and "purchasePrice" = _purchase_price
+  and "categoryId" = _category_id
+  and "companyId" = _company_id;
+  if found then
+    raise exception 'El producto ya existe para esta compañia';
+  else
+    insert into products(description, "brandId", stock, "minStock", "barCode", "internalCode",
+    "salePrice", "purchasePrice", "categoryId", "companyId")
+    values(_description, _brand_id, _stock, _min_stock, _bar_code, _internal_code,
+    _sale_price, _purchase_price, _category_id, _company_id);
+  end if;
+end;
+$$;
