@@ -5,7 +5,7 @@ import { RegisterBrandContainer } from './RegisterBrandStyles'
 
 import { BtnSave } from '@/components/molecules'
 import { Brand } from '@/interfaces'
-import { addBrand, updateBrand } from '@/services'
+import { addBrand, showBrand, updateBrand } from '@/services'
 import { useBrandStore, useCompanyStore } from '@/store'
 import { iconsAndVars } from '@/styles'
 
@@ -72,23 +72,27 @@ const RegisterBrand: React.FC<RegisterBrandProps> = ({
     if (action === 'Edit') {
       const brand = {
         id: dataSelect?.id,
-        _description: data.name,
+        description: data.name,
       }
 
       await updateBrand(brand)
 
-      editBrand()
+      const brands = await showBrand(companyData?.id as number)
+
+      editBrand(brands)
 
       onClose()
     } else {
       const brand = {
+        _companyid: companyData?.id,
         _description: data.name,
-        _companyId: companyData?.id,
       }
 
       await addBrand(brand)
 
-      insertBrand()
+      const brands = await showBrand(companyData?.id as number)
+
+      insertBrand(brands)
 
       onClose()
     }

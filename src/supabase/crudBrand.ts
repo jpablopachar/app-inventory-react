@@ -22,7 +22,7 @@ import { showAlert } from '@/utils'
 export const insertBrand = async (brand: any): Promise<any> => {
   console.log('Insertando marca: ', brand)
 
-  const { error } = await supabase.rpc('insertBrand', brand)
+  const { error } = await supabase.rpc('insert_brand', brand)
 
   if (error) {
     console.error('Error al insertar la marca: ', error)

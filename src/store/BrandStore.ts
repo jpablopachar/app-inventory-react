@@ -16,9 +16,9 @@ import { Brand } from '@/interfaces'
  * @property {(parameters: any, brand?: any) => any} getBrand -
  * Función para obtener marcas según los parámetros y, opcionalmente, una marca específica.
  * @property {(brand: any) => void} selectBrand - Función para seleccionar una marca.
- * @property {() => void} insertBrand - Función para insertar una nueva marca.
- * @property {() => void} deleteBrand - Función para eliminar una marca.
- * @property {() => void} editBrand - Función para editar una marca existente.
+ * @property {(brands: Brand[] | null) => void} insertBrand - Función para insertar una nueva marca.
+ * @property {(brands: Brand[] | null) => void} deleteBrand - Función para eliminar una marca.
+ * @property {(brands: Brand[] | null) => void} editBrand - Función para editar una marca existente.
  * @property {(brand: any) => void} searchBrand - Función para buscar una marca específica.
  */
 interface BrandStoreHook {
@@ -29,9 +29,9 @@ interface BrandStoreHook {
   parameters: any
   getBrands: (parameters: any, brands?: Brand[] | null) => any
   selectBrand: (brand: any) => void
-  insertBrand: () => void
-  deleteBrand: () => void
-  editBrand: () => void
+  insertBrand: (brands: Brand[] | null) => void
+  deleteBrand: (brands: Brand[] | null) => void
+  editBrand: (brands: Brand[] | null) => void
   searchBrand: (brands: Brand[] | null) => void
 }
 
@@ -51,9 +51,11 @@ interface BrandStoreHook {
  * @property {object} parameters - Parámetros utilizados para filtrar o buscar marcas.
  * @property getBrands - Obtiene y actualiza la lista de marcas y la marca seleccionada.
  * @property {(brand: any) => void} selectBrand - Selecciona una marca específica.
- * @property {() => void} insertBrand - Inserta una nueva marca y actualiza el estado.
- * @property {() => void} deleteBrand - Elimina una marca y actualiza el estado.
- * @property {() => void} editBrand - Edita una marca y actualiza el estado.
+ * @property {(brands: Brand[] | null) => void} insertBrand -
+ * Inserta una nueva marca y actualiza el estado.
+ * @property {(brands: Brand[] | null) => void} deleteBrand -
+ * Elimina una marca y actualiza el estado.
+ * @property {(brands: Brand[] | null) => void} editBrand - Edita una marca y actualiza el estado.
  * @property {(brand: any) => void} searchBrand - Actualiza la lista de marcas según la búsqueda.
  */
 export const useBrandStore = create<BrandStoreHook>((set, get) => ({
@@ -74,20 +76,20 @@ export const useBrandStore = create<BrandStoreHook>((set, get) => ({
     }
   },
   selectBrand: (brand: any) => set({ brandItemSelect: brand }),
-  insertBrand: () => {
+  insertBrand: (brands) => {
     const { getBrands, parameters } = get()
 
-    set(getBrands(parameters))
+    set(getBrands(parameters, brands))
   },
-  deleteBrand: () => {
+  deleteBrand: (brands) => {
     const { getBrands, parameters } = get()
 
-    set(getBrands(parameters))
+    set(getBrands(parameters, brands))
   },
-  editBrand: () => {
+  editBrand: (brands) => {
     const { getBrands, parameters } = get()
 
-    set(getBrands(parameters))
+    set(getBrands(parameters, brands))
   },
   searchBrand: (brands: Brand[] | null) => set({ brandsData: brands }),
 }))

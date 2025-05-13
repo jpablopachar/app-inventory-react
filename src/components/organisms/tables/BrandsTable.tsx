@@ -19,7 +19,7 @@ import Pagination from './Pagination'
 import TableActionsContent from './TableActionsContent'
 
 import { Brand } from '@/interfaces'
-import { removeBrand } from '@/services'
+import { removeBrand, showBrand } from '@/services'
 import { useBrandStore } from '@/store'
 import { showAlert, showAlertWithActions } from '@/utils'
 
@@ -99,7 +99,7 @@ const BrandsTable: React.FC<BrandsTableProps> = ({
     }
 
     const options: SweetAlertOptions = {
-      title: '¿Estás seguro(a)(e)?',
+      title: '¿Estás seguro(a)?',
       text: 'Una vez eliminado, ¡no podrá recuperar este registro!',
       icon: 'warning',
       showCancelButton: true,
@@ -112,7 +112,9 @@ const BrandsTable: React.FC<BrandsTableProps> = ({
       if (result.isConfirmed) {
         await removeBrand(brand.id)
 
-        deleteBrand()
+        const res = await showBrand(brand.companyId)
+
+        deleteBrand(res)
       }
     })
   }
