@@ -91,9 +91,9 @@ const RegisterCategory: React.FC<RegisterCategoryProps> = ({
     if (action === 'Edit') {
       const category = {
         id: dataSelect?.id,
-        description: data.name,
-        color: data.color,
-        _companyid: companyData?.id,
+        description: data.description,
+        color: currentColor,
+        companyId: companyData?.id,
       }
 
       setStateOfProcess(true)
@@ -110,8 +110,8 @@ const RegisterCategory: React.FC<RegisterCategoryProps> = ({
     } else {
       const category = {
         _companyid: companyData?.id,
-        _description: data.name,
-        _color: data.color,
+        _description: data.description,
+        _color: currentColor,
       }
 
       setStateOfProcess(true)
