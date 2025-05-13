@@ -16,3 +16,5 @@ export * from './crudBrand'
 
 export * from './crudCategory'
 
+export * from './crudProduct'
+
