@@ -10,6 +10,8 @@ export { default as Searcher } from './Searcher'
 
 export { default as DataUser } from './DataUser'
 
+export { default as Tabs } from './Tabs'
+
 export * from './forms'
 
 export * from './tables'

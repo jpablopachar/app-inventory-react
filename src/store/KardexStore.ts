@@ -12,6 +12,8 @@ import { Kardex } from '@/interfaces'
  * @property {Kardex[] | null} kardexData - Lista de datos de Kardex obtenidos o filtrados.
  * @property {Kardex | null} kardexItemSelect - Elemento de Kardex seleccionado actualmente.
  * @property {any} parameters - Parámetros utilizados para la búsqueda o consulta de Kardex.
+ * @property {(searcher: string | null) => void} setSearcher - Función para
+ * establecer el valor del buscador.
  * @property {(parameters: any, kardex?: Kardex[] | null) => any} getKardex -
  * Función para obtener los datos de Kardex según los parámetros proporcionados.
  * @property {(kardex: Kardex[] | null) => void} searchKardex - Función para
@@ -24,6 +26,7 @@ interface KardexStoreHook {
   kardexData: Kardex[] | null
   kardexItemSelect: Kardex | null
   parameters: any
+  setSearcher: (searcher: string | null) => void
   getKardex: (parameters: any, kardex?: Kardex[] | null) => any
   searchKardex: (kardex: Kardex[] | null) => void
   insertKardex: (kardex: Kardex[] | null) => void
@@ -42,6 +45,7 @@ interface KardexStoreHook {
  * @property {any} parameters - Parámetros utilizados para la consulta del Kardex.
  * @method getKardex - Establece los parámetros y los datos del Kardex.
  * @param parameters - Parámetros para la consulta.
+ * @method setSearcher - Establece el valor del buscador.
  * @param kardex - Datos del Kardex a establecer (opcional).
  * @method searchKardex - Actualiza los datos del Kardex según la búsqueda.
  * @param kardex - Datos filtrados del Kardex.
@@ -53,6 +57,7 @@ export const useKardexStore = create<KardexStoreHook>((set, get) => ({
   kardexData: null,
   kardexItemSelect: null,
   parameters: null,
+  setSearcher: (searcher: string | null) => set({ searcher }),
   getKardex: (parameters: any, kardex?: Kardex[] | null) => {
     set({ parameters })
     set({ kardexData: kardex })
