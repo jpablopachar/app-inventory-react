@@ -280,7 +280,7 @@ language plpgsql
 as $$
 begin
   insert into kardex(day, type, "userId", "productId", cant, "companyId", detail, state)
-  values(now(), 'entrada', old."userId", old."productId", old.cant, old."companyId", old.detail || '-anulado', 0);
+  values(now(), old.type || '-anulado', old."userId", old."productId", old.cant, old."companyId", old.detail || '-anulado', 0);
   update products
   set stock = stock + old.cant
   where id = new."productId";
