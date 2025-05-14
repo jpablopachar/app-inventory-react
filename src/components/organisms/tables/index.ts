@@ -9,3 +9,5 @@ export { default as Pagination } from './Pagination'
 export { default as TableActionsContent } from './TableActionsContent'
 
 export { default as ActionsTable } from './ActionsTable'
+
+export { default as PersonalTable } from './PersonalTable'
