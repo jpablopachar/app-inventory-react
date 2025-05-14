@@ -31,16 +31,20 @@ export const getIdAuthSupabase = async (): Promise<string | undefined> => {
 /**
  * Obtiene la lista de módulos desde la tabla 'modules' en Supabase.
  *
- * @returns {Promise<any[] | undefined>} Una promesa que resuelve con un arreglo
- * de módulos si existen, o undefined en caso contrario.
+ * @returns {Promise<any[] | null>} Una promesa que resuelve con un arreglo
+ * de módulos si existen, o null en caso contrario.
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getModules = async (): Promise<any[] | undefined> => {
-  const { data } = await supabase.from('modules').select()
+export const getModules = async (): Promise<any[] | null> => {
+  const { data, error } = await supabase.from('modules').select()
 
-  if (data) {
-    console.log(`Lista de módulos: ${data}`)
+  if (error) {
+    console.log('Error al obtener los módulos:', error)
 
-    return data
+    return null
   }
+
+  console.log('Lista de módulos:', data)
+
+  return data
 }

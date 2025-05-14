@@ -122,7 +122,7 @@ export const getAllUsers = async (companyId: number): Promise<any> => {
     return null
   }
 
-  console.log(`Usuarios de esta compañía: ${data}`)
+  console.log('Usuarios de la compañía: ', data)
 
   return data
 }

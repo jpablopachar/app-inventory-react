@@ -10,3 +10,5 @@ export { default as CategoryProTemplate } from './CategoryProTemplate'
 
 export { default as ProductsTemplate } from './ProductsTemplate'
 
+export { default as PersonalTemplate } from './PersonalTemplate'
+

@@ -13,3 +13,5 @@ export * from './CategoryStore'
 export * from './ProductStore'
 
 export * from './OperationsStore'
+
+export * from './GlobalStore'
