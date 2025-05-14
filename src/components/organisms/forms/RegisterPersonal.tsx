@@ -9,7 +9,7 @@ import InputText from './InputText'
 
 import Selector from '../Selector'
 
-import { BtnSave, GenericList, SpinnerLoader } from '@/components/molecules'
+import { BtnSave, GenericList, ModulesList, SpinnerLoader } from '@/components/molecules'
 import { Personal } from '@/interfaces'
 import {
   addAssignments,
@@ -24,9 +24,8 @@ import {
 } from '@/services'
 import {
   useCompanyStore,
-  useGlobalStore,
   usePermissionsStore,
-  useUserStore,
+  useUserStore
 } from '@/store'
 
 import { iconsAndVars } from '@/styles'
@@ -53,15 +52,11 @@ const RegisterPersonal: React.FC<RegisterPersonalProps> = ({
 
   const { companyData } = useCompanyStore()
 
-  const { modulesData } = useGlobalStore()
-
-  const { permissionsEditData, getPermissionsEdit } = usePermissionsStore()
+  const { getPermissionsEdit } = usePermissionsStore()
 
   const [brandState, setBrandState] = useState(false)
   const [categoryState, setCategoryState] = useState(false)
-  const [openRegisterBrand, setOpenRegisterBrand] = useState(false)
-  const [openRegisterCategory, setOpenRegisterCategory] = useState(false)
-  const [subAction, setSubAction] = useState('')
+  const [subAction] = useState('')
   const [checkboxs, setCheckboxs] = useState<any[]>([])
   const [userType, setUserType] = useState<{
     icon: string
@@ -335,12 +330,11 @@ const RegisterPersonal: React.FC<RegisterPersonalProps> = ({
               )}
             </FormsStylesContainerSelector>
             PERMISOS:🔑
-            {/* <ModulesList
-              accion={accion}
+            <ModulesList
+              action={action}
               setCheckboxs={setCheckboxs}
               checkboxs={checkboxs}
-              tipouser={tipouser}
-            /> */}
+            />
           </section>
           <div className="btnSaveContent">
             <BtnSave

@@ -30,4 +30,6 @@ export { default as SpinnerLoader } from './SpinnerLoader'
 
 export { default as Spinner } from './Spinner'
 
+export { default as ModulesList } from './ModulesList'
+
 export * from './animatedFunds'
