@@ -206,3 +206,68 @@ as $$
 select u.id, u.fullname, u."userType", u.state, u.email, u."numDoc", u.phone, u.address, u."docType" from "assignCompany" ac inner join users u on u.id = ac."userId" inner join company c on c.id = ac."companyId"
 where ac."companyId" = _company_id;
 $$;
+
+create or replace function show_kardex_company(_company_id int)
+returns table(
+  id int,
+  description text,
+  day text,
+  cant float,
+  type text,
+  detail text,
+  fullname text,
+  stock numeric
+)
+language sql
+as $$
+select k.id, p.description, k.day, k.cant, k.type, k.detail, u.fullname, p.stock from kardex k inner join company c on c.id = k."companyId" inner join users u on u.id = k."userId" inner join products p on p.id = k."productId"
+where k."companyId" = _company_id;
+$$;
+
+create or replace function search_kardex(_company_id int, _searcher text)
+returns table(
+  id int,
+  description text,
+  day date,
+  cant float,
+  type text,
+  detail text,
+  fullname text,
+  stock numeric
+)
+language sql
+as $$
+select k.id, p.description, k.day, k.cant, k.type, k.detail, u.fullname, p.stock from kardex k inner join company c on c.id = k."companyId" inner join users u on u.id = k."userId" inner join products p on p.id = k."productId"
+where p.description LIKE '%' || _searcher || '%' and k."companyId" = _company_id;
+$$;
+
+create or replace function modify_stock()
+returns trigger
+language plpgsql
+as $$
+declare "stockProducts" numeric;
+begin
+  if new.type = 'entrada' then
+    update products
+    set stock = stock + new.cant
+    where id = new."productId";
+  else
+    select into "stockProducts" stock
+    from products
+    where id = new."productId";
+    if "stockProducts" > new.cant then
+      update products
+      set stock = stock - new.cant
+      where id = new."productId";
+    else
+      raise exception 'No hay suficiente stock';
+    end if;
+  end if;
+  return new;
+end;
+$$;
+
+create or replace trigger modify_stock_trigger
+after insert on kardex
+for each row
+execute function modify_stock();
