@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
 import { BlockingPage, PersonalTemplate, SpinnerLoader } from '@/components'
+import { Permissions } from '@/interfaces'
 import { showAllUsers, showModules } from '@/services'
 import {
   useCompanyStore,
@@ -49,7 +50,7 @@ const Personal: React.FC = () => {
     queryFn: async () => {
       const res = await showModules()
 
-      getModules(res)
+      getModules(res as Permissions[])
 
       return res
     },
