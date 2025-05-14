@@ -15,3 +15,5 @@ export * from './ProductStore'
 export * from './OperationsStore'
 
 export * from './GlobalStore'
+
+export * from './KardexStore'

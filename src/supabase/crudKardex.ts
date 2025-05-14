@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
@@ -39,24 +40,24 @@ export const insertKardex = async (kardex: any): Promise<void> => {
     showAlert(options)
   }
 
-  console.log('El kardex fue insertado correctamente: ')
+  console.log('El kardex fue insertado correctamente')
 }
 
 /**
  * Obtiene el kardex de una compañía a partir de su ID utilizando una función RPC de Supabase.
  *
- * @param id - El identificador único de la compañía cuyo kardex se desea obtener.
+ * @param companyId - El identificador único de la compañía cuyo kardex se desea obtener.
  * @returns Una promesa que resuelve con los datos del kardex o `null` si ocurre un error.
  *
  * @remarks
  * - Muestra una alerta utilizando `showAlert` si ocurre un error durante la obtención de datos.
  * - Los resultados se ordenan de forma descendente por el campo `id`.
  */
-export const getKardex = async (id: string): Promise<any> => {
-  console.log('Obteniendo kardex con ID: ', id)
+export const getKardex = async (companyId: number): Promise<any> => {
+  console.log('Obteniendo kardex con ID: ', companyId)
 
   const { data, error } = await supabase
-    .rpc('getKardexCompany', { _CompanyId: id })
+    .rpc('show_kardex_company', { _company_id: companyId })
     .order('id', { ascending: false })
 
   if (error) {
@@ -82,7 +83,7 @@ export const getKardex = async (id: string): Promise<any> => {
 /**
  * Busca registros de kardex en la base de datos utilizando una función RPC de Supabase.
  *
- * @param kardex - Objeto que contiene los parámetros de búsqueda,
+ * @param params - Objeto que contiene los parámetros de búsqueda,
  * incluyendo el ID de la compañía (`CompanyId`) y el término de búsqueda (`search`).
  * @returns Una promesa que resuelve con los datos encontrados o `null` si ocurre un error.
  *
@@ -91,13 +92,13 @@ export const getKardex = async (id: string): Promise<any> => {
  * - Los resultados se ordenan de forma descendente por el campo `id`.
  * - Utiliza la función RPC `searchKardexCompany` en Supabase.
  */
-export const searchKardex = async (kardex: any): Promise<any> => {
-  console.log('Buscando kardex: ', kardex)
+export const searchKardex = async (params: any): Promise<any> => {
+  console.log('Buscando kardex: ', params)
 
   const { data, error } = await supabase
-    .rpc('searchKardexCompany', {
-      _idCompany: kardex.CompanyId,
-      search: kardex.search,
+    .rpc('search_kardex', {
+      _company_id: params.companyId,
+      _searcher: params.searcher,
     })
     .order('id', { ascending: false })
 

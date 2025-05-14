@@ -14,3 +14,5 @@ export * from './productService'
 
 export * from './globalService'
 
+export * from './kardexService'
+
