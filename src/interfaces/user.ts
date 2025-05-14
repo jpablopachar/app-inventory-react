@@ -39,6 +39,7 @@ export interface UserData {
  * @property phone - Número de teléfono del usuario.
  * @property address - Dirección física del usuario.
  * @property docType - Tipo de documento de identificación (DNI, pasaporte, etc.).
+ * @property password - Contraseña del usuario (opcional).
  */
 export interface Personal {
   id: number
@@ -50,4 +51,5 @@ export interface Personal {
   phone: string
   address: string
   docType: string
+  password?: string
 }

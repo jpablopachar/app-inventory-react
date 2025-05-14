@@ -85,7 +85,7 @@ export const getPermissions = async (
  * @throws Muestra una alerta si ocurre un error durante la eliminación de los permisos.
  */
 export const deletePermissions = async (
-  userId: string,
+  userId: number,
 ): Promise<null | undefined> => {
   console.log('Eliminando permisos para el usuario: ', userId)
 

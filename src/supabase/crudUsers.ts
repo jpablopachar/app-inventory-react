@@ -53,22 +53,27 @@ export const insertUsers = async (user: any): Promise<any> => {
  * @returns Retorna `null` si ocurre un error durante la
  * inserción, o `undefined` si la operación es exitosa.
  */
-export const insertAssignments = async (
-  values: any,
-): Promise<null | undefined> => {
+export const insertAssignments = async (values: any): Promise<void> => {
+  console.log('Insertando asignación: ', values)
+
   const { error } = await supabase.from('assignCompany').insert(values)
 
   if (error) {
-    /* const options: SweetAlertOptions = {
+    console.error('Error al insertar la asignación: ', error)
+
+    const options: SweetAlertOptions = {
       icon: 'error',
       title: 'Oops...',
       text: `Error al insertar la asignación: ${error.message}`,
       footer: '<a href="">error</a>',
     }
 
-    showAlert(options) */
-    return null
+    showAlert(options)
+
+    return
   }
+
+  console.log('Asignación insertada correctamente')
 }
 
 /**
@@ -125,4 +130,84 @@ export const getAllUsers = async (companyId: number): Promise<any> => {
   console.log('Usuarios de la compañía: ', data)
 
   return data
+}
+
+/**
+ * Edita el tema y la moneda de un usuario en la base de datos.
+ *
+ * Esta función actualiza los campos del usuario especificados en el objeto `user`
+ * en la tabla 'users' de Supabase, utilizando el ID del usuario para identificar el registro.
+ * Si ocurre un error durante la actualización, muestra una alerta con el mensaje de error.
+ *
+ * @param user - Objeto que contiene los datos del usuario a actualizar, incluyendo el campo `id`.
+ * @returns Una promesa que se resuelve cuando la operación ha finalizado.
+ */
+export const editThemeUserCurrency = async (user: any): Promise<void> => {
+  console.log('Editando tema y moneda del usuario: ', user)
+
+  const { error } = await supabase.from('users').update(user).eq('id', user.id)
+
+  if (error) {
+    console.error('Error al editar el tema y moneda del usuario: ', error)
+
+    const options: SweetAlertOptions = {
+      icon: 'error',
+      title: 'Oops...',
+      text: `Error al editar el tema y moneda del usuario: ${error.message}`,
+      footer: '<a href="">error</a>',
+    }
+
+    showAlert(options)
+
+    return
+  }
+
+  console.log('Tema y moneda del usuario editados correctamente')
+}
+
+/**
+ * Edita un usuario existente en la base de datos 'users' utilizando Supabase.
+ *
+ * @async
+ * @param {any} user - Objeto que contiene los datos del usuario a editar, incluyendo el campo 'id'.
+ * @returns {Promise<void>} Una promesa que se resuelve cuando la operación ha finalizado.
+ *
+ * @description
+ * Esta función actualiza la información de un usuario en la tabla 'users' de Supabase.
+ * Muestra una alerta de éxito o error dependiendo del resultado de la operación.
+ * En caso de error, muestra un mensaje descriptivo.
+ * En caso de éxito, muestra una alerta de confirmación.
+ */
+export const editUser = async (user: any): Promise<void> => {
+  console.log('Editando usuario: ', user)
+
+  let options: SweetAlertOptions = {}
+
+  const { error } = await supabase.from('users').update(user).eq('id', user.id)
+
+  if (error) {
+    console.error('Error al editar el usuario: ', error)
+
+    options = {
+      icon: 'error',
+      title: 'Oops...',
+      text: `Error al editar el usuario: ${error.message}`,
+      footer: '<a href="">error</a>',
+    }
+
+    showAlert(options)
+
+    return
+  }
+
+  console.log('Usuario editado correctamente')
+
+  options = {
+    icon: 'success',
+    title: 'Datos modificados',
+    showConfirmButton: false,
+    timer: 1500,
+  }
+
+  showAlert(options)
 }

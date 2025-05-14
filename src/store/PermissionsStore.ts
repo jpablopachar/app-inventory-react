@@ -8,17 +8,17 @@ import { Permission } from '@/interfaces'
  * Interfaz que define el contrato para el manejo del estado de permisos en la aplicación.
  *
  * @property {Permission[]} permissionsData - Lista de permisos obtenidos o almacenados.
- * @property {any[]} permissionsEditData - Lista de permisos en modo edición.
+ * @property {Permission[] | null} permissionsEditData - Lista de permisos en modo edición.
  * @property {(permissions: Permission[]) => void} getPermissions - Función
  * para establecer o actualizar la lista de permisos.
- * @property {(permissions: any) => void} getPermissionsEdit -
+ * @property {(permissions: Permission[] | null) => void} getPermissionsEdit -
  * Función para establecer o actualizar la lista de permisos en edición.
  */
 interface PermissionsStoreHook {
   permissionsData: Permission[]
-  permissionsEditData: any[]
+  permissionsEditData: Permission[] | null
   getPermissions: (permissions: any) => void
-  getPermissionsEdit: (permissions: any) => void
+  getPermissionsEdit: (permissions: Permission[] | null) => void
 }
 
 /**
@@ -36,6 +36,6 @@ export const usePermissionsStore = create<PermissionsStoreHook>((set) => ({
   permissionsData: [],
   permissionsEditData: [],
   getPermissions: (permissions: Permission[]) => set({ permissionsData: permissions }),
-  getPermissionsEdit: (permissions: any) =>
+  getPermissionsEdit: (permissions: Permission[] | null) =>
     set({ permissionsEditData: permissions }),
 }))

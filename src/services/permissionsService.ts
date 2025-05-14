@@ -36,7 +36,7 @@ export const showPermissions = async (userId: number): Promise<Permission[] | nu
  * @param userId - El identificador único del usuario cuyos permisos serán eliminados.
  * @returns Una promesa que se resuelve cuando los permisos han sido eliminados.
  */
-export const removePermissions = async (userId: string): Promise<void> => {
+export const removePermissions = async (userId: number): Promise<void> => {
   await deletePermissions(userId)
 }
 

@@ -8,7 +8,7 @@ import InputText from './InputText'
 import { ContentClose, RegisterAdminContainer } from './RegisterAdminStyle'
 
 import { BtnSave } from '@/components/molecules'
-import { addUser } from '@/services'
+import { addAdminUser } from '@/services'
 import { iconsAndVars } from '@/styles'
 
 /**
@@ -48,7 +48,7 @@ const RegisterAdmin: React.FC<RegisterAdminProps> = ({ state, setState }) => {
   const navigate = useNavigate()
 
   const mutation = useMutation({
-    mutationFn: addUser,
+    mutationFn: addAdminUser,
     onSuccess: () => {
       setState(!state)
       navigate('/')
