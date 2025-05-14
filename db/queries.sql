@@ -216,11 +216,12 @@ returns table(
   type text,
   detail text,
   fullname text,
-  stock numeric
+  stock numeric,
+  state int
 )
 language sql
 as $$
-select k.id, p.description, k.day, k.cant, k.type, k.detail, u.fullname, p.stock from kardex k inner join company c on c.id = k."companyId" inner join users u on u.id = k."userId" inner join products p on p.id = k."productId"
+select k.id, p.description, k.day, k.cant, k.type, k.detail, u.fullname, p.stock, k.state from kardex k inner join company c on c.id = k."companyId" inner join users u on u.id = k."userId" inner join products p on p.id = k."productId"
 where k."companyId" = _company_id;
 $$;
 
@@ -233,11 +234,12 @@ returns table(
   type text,
   detail text,
   fullname text,
-  stock numeric
+  stock numeric,
+  state int
 )
 language sql
 as $$
-select k.id, p.description, k.day, k.cant, k.type, k.detail, u.fullname, p.stock from kardex k inner join company c on c.id = k."companyId" inner join users u on u.id = k."userId" inner join products p on p.id = k."productId"
+select k.id, p.description, k.day, k.cant, k.type, k.detail, u.fullname, p.stock, k.state from kardex k inner join company c on c.id = k."companyId" inner join users u on u.id = k."userId" inner join products p on p.id = k."productId"
 where p.description LIKE '%' || _searcher || '%' and k."companyId" = _company_id;
 $$;
 
@@ -271,3 +273,22 @@ create or replace trigger modify_stock_trigger
 after insert on kardex
 for each row
 execute function modify_stock();
+
+create or replace function delete_kardex()
+returns trigger
+language plpgsql
+as $$
+begin
+  insert into kardex(day, type, "userId", "productId", cant, "companyId", detail, state)
+  values(now(), 'entrada', old."userId", old."productId", old.cant, old."companyId", old.detail || '-anulado', 0);
+  update products
+  set stock = stock + old.cant
+  where id = new."productId";
+  return old;
+end;
+$$;
+
+create or replace trigger delete_kardex_trigger
+before delete on kardex
+for each row
+execute function delete_kardex();
