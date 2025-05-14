@@ -12,3 +12,5 @@ export { default as Products } from './Products'
 
 export { default as Personal } from './Personal'
 
+export { default as Kardex } from './Kardex'
+

@@ -12,3 +12,5 @@ export { default as ProductsTemplate } from './ProductsTemplate'
 
 export { default as PersonalTemplate } from './PersonalTemplate'
 
+export { default as KardexTemplate } from './KardexTemplate'
+

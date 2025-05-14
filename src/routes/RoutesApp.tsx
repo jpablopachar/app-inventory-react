@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom'
 import ProtectedRoute from './ProtectedRoute'
 
 import { Layout } from '@/layouts'
-import { Brand, Category, Configuration, Home, Login, Personal, Products } from '@/pages'
+import { Brand, Category, Configuration, Home, Kardex, Login, Personal, Products } from '@/pages'
 
 /**
  * Componente principal de rutas de la aplicación.
@@ -86,6 +86,16 @@ const RoutesApp: React.FC = () => {
           <ProtectedRoute accessBy="authenticated">
             <Layout>
               <Brand />
+            </Layout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/kardex"
+        element={
+          <ProtectedRoute accessBy="authenticated">
+            <Layout>
+              <Kardex />
             </Layout>
           </ProtectedRoute>
         }

@@ -1,5 +1,5 @@
 import { Kardex, KardexRequest } from '@/interfaces'
-import { getKardex, insertKardex } from '@/supabase'
+import { getKardex, insertKardex, searchKardex } from '@/supabase'
 
 /**
  * Parámetros requeridos para realizar operaciones relacionadas con el Kardex.
@@ -42,7 +42,7 @@ export const showKardex = async (companyId: number): Promise<Kardex[] | null> =>
  * @returns Una promesa que resuelve a un arreglo de objetos Kardex o null si no
  * se encuentran resultados.
  */
-export const searchKardex = async (params: KardexParams): Promise<Kardex[] | null> => {
+export const seekKardex = async (params: KardexParams): Promise<Kardex[] | null> => {
   const res: Kardex[] | null = await searchKardex(params)
 
   return res
