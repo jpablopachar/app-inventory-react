@@ -59,7 +59,7 @@ const ModulesList: React.FC<ModulesListProps> = ({
     setCheckboxs((prev: any) => {
       return prev.map((item: any) => {
         if (item.id === id) {
-          return { ...item, checked: !item.checked }
+          return { ...item, check: !item.check }
         }
 
         return item
@@ -93,7 +93,8 @@ const ModulesList: React.FC<ModulesListProps> = ({
     } else {
       setCheckboxs(modulesData)
     }
-  })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [permissionsEditData])
 
   return (
     <ModulesListContainer>
@@ -111,7 +112,7 @@ const ModulesList: React.FC<ModulesListProps> = ({
               className="checkbox"
               checked={item.check}
             />
-            <span>{item.nombre}</span>
+            <span>{item.name}</span>
           </div>
         )
       })}

@@ -125,25 +125,27 @@ export const addAssignments = async (values: any): Promise<void> => {
 /**
  * Verifica y asigna permisos a un usuario según los datos proporcionados.
  *
- * Itera sobre la lista de permisos y, para cada permiso que tenga
- * la propiedad `check` en verdadero,
- * llama a la función `addPermissions` para asignar el permiso correspondiente al usuario.
- *
- * @param userId - El identificador único del usuario al que se le asignarán los permisos.
+ * @param userId - El identificador del usuario al que se le asignarán los permisos.
  * @param checkPermissionsData - Un arreglo de objetos de tipo
- * `Permissions` que contiene la información de los permisos a verificar y asignar.
+ * `Permissions` que indica los permisos a verificar y asignar.
+ * @returns Una promesa que se resuelve cuando se han procesado todos los permisos.
  */
 export const checkPermissions = (
-  userId: number, checkPermissionsData: Permissions[],
-): void => {
-  checkPermissionsData.forEach(async (currentPermission) => {
-    if (currentPermission.check) {
-      const permissionsParams = {
-        userId,
-        moduleId: currentPermission.id,
-      }
+  userId: number,
+  checkPermissionsData: Permissions[],
+): Promise<void> => {
+  return new Promise<void>((resolve) => {
+    checkPermissionsData.forEach(async (currentPermission) => {
+      if (currentPermission.check) {
+        const permissionsParams = {
+          userId,
+          moduleId: currentPermission.id,
+        }
 
-      await addPermissions(permissionsParams)
-    }
+        await addPermissions(permissionsParams)
+      }
+    })
+
+    resolve(undefined)
   })
 }

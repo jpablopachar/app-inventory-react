@@ -78,6 +78,8 @@ const RegisterPersonal: React.FC<RegisterPersonalProps> = ({
       const res = await showPermissions(dataSelect?.id as number)
 
       getPermissionsEdit(res)
+
+      return res
     },
     enabled: !!dataSelect?.id,
   })
@@ -108,7 +110,7 @@ const RegisterPersonal: React.FC<RegisterPersonalProps> = ({
         numDoc: data.numDoc,
         phone: data.phone,
         address: data.address,
-        status: 'activo',
+        state: 'activo',
         userType: userType.description,
         docType: docType.description,
       }
@@ -139,7 +141,7 @@ const RegisterPersonal: React.FC<RegisterPersonalProps> = ({
           phone: data.phone,
           address: data.address,
           registrationDate: new Date(),
-          status: 'activo',
+          state: 'activo',
           authId: res.id,
           userType: userType.description,
           docType: docType.description,
@@ -152,7 +154,7 @@ const RegisterPersonal: React.FC<RegisterPersonalProps> = ({
           userId: response.id,
         })
 
-        checkPermissions(response.id, checkboxs)
+        await checkPermissions(response.id, checkboxs)
 
         await closeSession()
 
