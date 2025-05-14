@@ -188,3 +188,21 @@ as $$
 select p.id, p.description, p."brandId", p.stock, p."minStock", p."barCode", p."internalCode", p."salePrice", p."purchasePrice", p."categoryId", p."companyId", b.description as brand, c.description as category, c.color from products p inner join categories c on c.id = p."categoryId" inner join brand b on b.id = p."brandId"
 where p.description LIKE '%' || _searcher || '%' and p."companyId" = _company_id;
 $$;
+
+create or replace function show_personal(_company_id int)
+returns table(
+  id int,
+  fullname text,
+  "userType" text,
+  state text,
+  email text,
+  "numDoc" text,
+  phone text,
+  address text,
+  "docType" text
+)
+language sql
+as $$
+select u.id, u.fullname, u."userType", u.state, u.email, u."numDoc", u.phone, u.address, u."docType" from "assignCompany" ac inner join users u on u.id = ac."userId" inner join company c on c.id = ac."companyId"
+where ac."companyId" = _company_id;
+$$;

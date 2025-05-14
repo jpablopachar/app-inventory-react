@@ -26,3 +26,28 @@ export interface UserData {
   docType: string
   companyId: string
 }
+
+/**
+ * Representa la información personal de un usuario en el sistema.
+ *
+ * @property id - Identificador único del usuario.
+ * @property fullname - Nombre completo del usuario.
+ * @property userType - Tipo de usuario (por ejemplo, administrador, empleado, etc.).
+ * @property state - Estado actual del usuario (activo, inactivo, etc.).
+ * @property email - Correo electrónico del usuario.
+ * @property numDoc - Número de documento de identificación del usuario.
+ * @property phone - Número de teléfono del usuario.
+ * @property address - Dirección física del usuario.
+ * @property docType - Tipo de documento de identificación (DNI, pasaporte, etc.).
+ */
+export interface Personal {
+  id: number
+  fullname: string
+  userType: string
+  state: string
+  email: string
+  numDoc: string
+  phone: string
+  address: string
+  docType: string
+}

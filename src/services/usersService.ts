@@ -1,7 +1,7 @@
 import { User } from '@supabase/supabase-js'
 
-import { UserData } from '@/interfaces'
-import { insertUsers, showUsers, signIn, signUp } from '@/supabase'
+import { Personal, UserData } from '@/interfaces'
+import { getAllUsers, insertUsers, showUsers, signIn, signUp } from '@/supabase'
 
 /**
  * Agrega un nuevo usuario al sistema.
@@ -48,6 +48,21 @@ export const addUser = async (credentials: {
  */
 export const getUsers = async (): Promise<UserData | null> => {
   const res: UserData | null = await showUsers()
+
+  return res
+}
+
+/**
+ * Obtiene y retorna la lista de todos los usuarios (Personal) asociados a una empresa específica.
+ *
+ * @param companyId - El identificador único de la empresa cuyos usuarios se desean obtener.
+ * @returns Una promesa que resuelve con un arreglo de objetos
+ * Personal o null si no se encuentran usuarios.
+ */
+export const showAllUsers = async (
+  companyId: number,
+): Promise<Personal[] | null> => {
+  const res: Personal[] | null = await getAllUsers(companyId)
 
   return res
 }

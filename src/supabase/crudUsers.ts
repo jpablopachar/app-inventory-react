@@ -112,9 +112,10 @@ export const showUsers = async (): Promise<any> => {
  * @returns Una promesa que resuelve con los datos de los usuarios de la compañía, o `null`
  * si se produce un error.
  */
-export const getAllUsers = async (companyId: string): Promise<any> => {
-  const { data, error } = await supabase.rpc('showEmployees', {
-    _idCompany: companyId,
+export const getAllUsers = async (companyId: number): Promise<any> => {
+  const { data, error } = await supabase.rpc('show_personal', {
+    // eslint-disable-next-line camelcase
+    _company_id: companyId,
   })
 
   if (error) {
