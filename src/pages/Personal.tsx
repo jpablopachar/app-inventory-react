@@ -68,7 +68,7 @@ const Personal: React.FC = () => {
     item.modules.name.includes('Personal'),
   )
 
-  if (permissionState) {
+  if (!permissionState) {
     return <BlockingPage state={permissionState} />
   }
 

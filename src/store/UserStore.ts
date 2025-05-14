@@ -2,7 +2,7 @@
 
 import { create } from 'zustand'
 
-import { UserData } from '@/interfaces'
+import { Personal, UserData } from '@/interfaces'
 
 /**
  * Interfaz que define el estado y las funciones del store de usuario.
@@ -13,24 +13,24 @@ import { UserData } from '@/interfaces'
  * usuario actual, o null si no hay usuario seleccionado.
  * @property {UserData | null} userData - Información detallada
  * del usuario actual, o null si no hay usuario seleccionado.
- * @property {any[]} usersAllData - Lista con la información de todos los usuarios.
+ * @property {Personal[] | null} usersAllData - Lista con la información de todos los usuarios.
  * @property {(data: any) => void} setModulesCheckData - Función
  * para actualizar los datos de módulos verificados.
  * @property {() => void} setUserId - Función para establecer el identificador del usuario actual.
  * @property {(user: UserData | null) => void} showUsers - Función
  * para mostrar la información de un usuario específico.
- * @property {(users: any) => void} showUsersAll - Función para
+ * @property {(users: Personal[] | null) => void} showUsersAll - Función para
  * mostrar la información de todos los usuarios.
  */
 interface UserStoreHook {
   ModulesCheckData: any[]
   userId: number | null
   userData: UserData | null
-  usersAllData: any[]
+  usersAllData: Personal[] | null
   setModulesCheckData: (data: any) => void
   setUserId: () => void
   showUsers: (user: UserData | null) => void
-  showUsersAll: (users: any) => void
+  showUsersAll: (users: Personal[] | null) => void
 }
 
 /**
@@ -58,14 +58,14 @@ export const useUserStore = create<UserStoreHook>((set) => ({
   ModulesCheckData: [],
   userId: null,
   userData: null,
-  usersAllData: [],
+  usersAllData: null,
   setModulesCheckData: (data: any) => set({ ModulesCheckData: data }),
   setUserId: () => set({ userId: 0 }),
   showUsers: (user) => {
     set({ userData: user })
     set({ userId: user?.id })
   },
-  showUsersAll: (users: any) => set({ usersAllData: users }),
+  showUsersAll: (users: Personal[] | null) => set({ usersAllData: users }),
   /* insertUser: async (
     credentials: SignUpWithPasswordCredentials,
     userData: UserData,
