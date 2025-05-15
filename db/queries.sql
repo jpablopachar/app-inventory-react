@@ -309,3 +309,16 @@ language sql
 as $$
 select p.id, p.description, p.stock, p."minStock", p."barCode", p."internalCode", p."salePrice", p."purchasePrice", p."companyId" from products p where p."companyId" = _company_id and p.stock <= p."minStock";
 $$;
+
+create or replace function valued_inventory(_company_id int)
+returns table(
+  id int,
+  description text,
+  stock numeric,
+  "purchasePrice" numeric,
+  total numeric
+)
+language sql
+as $$
+select p.id, p.description, p.stock, p."purchasePrice", (p.stock * p."purchasePrice") as total from products p where p."companyId" = _company_id;
+$$;
