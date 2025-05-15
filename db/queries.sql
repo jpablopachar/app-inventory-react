@@ -207,7 +207,7 @@ select u.id, u.fullname, u."userType", u.state, u.email, u."numDoc", u.phone, u.
 where ac."companyId" = _company_id;
 $$;
 
-create or replace function show_kardex_company(_company_id int)
+create or replace function show_kardex_company(_company_id int, _product_id int)
 returns table(
   id int,
   description text,
@@ -222,7 +222,7 @@ returns table(
 language sql
 as $$
 select k.id, p.description, k.day, k.cant, k.type, k.detail, u.fullname, p.stock, k.state from kardex k inner join company c on c.id = k."companyId" inner join users u on u.id = k."userId" inner join products p on p.id = k."productId"
-where k."companyId" = _company_id;
+where k."companyId" = _company_id and k."productId" = _product_id;
 $$;
 
 create or replace function search_kardex(_company_id int, _searcher text)
@@ -292,3 +292,20 @@ create or replace trigger delete_kardex_trigger
 before delete on kardex
 for each row
 execute function delete_kardex();
+
+create or replace function report_products_min(_company_id int)
+returns table(
+  id int,
+  description text,
+  stock numeric,
+  "minStock" numeric,
+  "barCode" text,
+  "internalCode" text,
+  "salePrice" numeric,
+  "purchasePrice" numeric,
+  "companyId" int
+)
+language sql
+as $$
+select p.id, p.description, p.stock, p."minStock", p."barCode", p."internalCode", p."salePrice", p."purchasePrice", p."companyId" from products p where p."companyId" = _company_id and p.stock <= p."minStock";
+$$;
